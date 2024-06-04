@@ -24,7 +24,7 @@ const router = createBrowserRouter([
         element: <FriendListPage />,
       },
       {
-        path: "calendar",
+        path: "calender",
         element: <Calender />,
       },
     ],
