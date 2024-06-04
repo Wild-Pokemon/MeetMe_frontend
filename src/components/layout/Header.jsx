@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import styles from "./Header.module.scss";
-import meetmeLogo from "../../assets/meetme_logo_symbol.svg";
-import hamburger from "../../assets/menu.svg";
-import closeIcon from "../../assets/close.svg"; // 닫기 아이콘 추가
+import styles from "@styles/components/Header.module.scss";
+import meetmeLogo from "@assets/meetme_logo_symbol.svg";
+import hamburger from "@assets/menu.svg";
+import closeIcon from "@assets/close.svg"; // 닫기 아이콘 추가
 // import myPageIcon from "../../assets/myPage.svg"; // 각 아이콘을 추가합니다
 // import friendsIcon from "../../assets/friends.svg";
 // import scheduleIcon from "../../assets/schedule.svg";
