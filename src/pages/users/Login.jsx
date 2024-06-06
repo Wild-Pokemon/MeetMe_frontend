@@ -32,35 +32,37 @@ function Login() {
     <div className="login_wrapper">
       <h1>로그인</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          type="email"
-          id="email"
-          placeholder="이메일을 입력하세요"
-          error={errors.email ? true : false}
-          message={errors.email && errors.email.message}
-          {...register("email", {
-            required: "이메일을 입력해 주세요.",
-            pattern: {
-              value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-              message: "이메일 형식이 아닙니다.",
-            },
-          })}
-        >
-          이메일
-        </Input>
+        <div className="input-container">
+          <label htmlFor="email">이메일</label>
+          <Input
+            type="email"
+            id="email"
+            placeholder="이메일을 입력하세요"
+            error={errors.email ? true : false}
+            {...register("email", {
+              required: "이메일을 입력해 주세요.",
+              pattern: {
+                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                message: "이메일 형식이 아닙니다.",
+              },
+            })}
+          />
+          {errors.email && <p>{errors.email.message}</p>}
+        </div>
 
-        <Input
-          type="password"
-          id="password"
-          placeholder="비밀번호를 입력하세요"
-          error={errors.password ? true : false}
-          message={errors.password && errors.password.message}
-          {...register("password", {
-            required: "비밀번호를 입력해 주세요.",
-          })}
-        >
-          비밀번호
-        </Input>
+        <div className="input-container">
+          <label htmlFor="password">비밀번호</label>
+          <Input
+            type="password"
+            id="password"
+            placeholder="비밀번호를 입력하세요"
+            error={errors.password ? true : false}
+            {...register("password", {
+              required: "비밀번호를 입력해 주세요.",
+            })}
+          />
+          {errors.password && <p>{errors.password.message}</p>}
+        </div>
 
         <div className="checkbox">
           <input
