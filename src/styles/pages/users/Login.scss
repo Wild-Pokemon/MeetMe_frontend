@@ -24,10 +24,17 @@
 
     & label {
       @include font(1.2rem, 1.6rem, var(--font-regular));
+      @include flex-horizontal(10px);
       color: var(--color-gray-50);
       position: relative;
-      @include flex-horizontal(10px);
       align-items: center;
+      cursor: pointer;
+      outline: none;
+    }
+
+    & label:focus {
+      border-radius: 4px;
+      box-shadow: inset 0 0 0 1px var(--color-primary);
     }
 
     & label::before {
@@ -78,6 +85,11 @@
     height: 40px;
     border-radius: 20px;
     margin: 10px 0;
+    outline: none;
+
+    &:focus {
+      box-shadow: inset 0 0 0 2px var(--color-primary);
+    }
   }
 
   .help {
@@ -85,6 +97,23 @@
     @include font(1.2rem, 1.6rem, var(--font-regular));
     color: var(--color-gray-50);
     margin-bottom: 30px;
+    outline: none;
+
+    .help-link {
+      outline: none;
+      padding: 2px;
+      box-sizing: border-box;
+    }
+
+    .help-link:hover {
+      font-weight: var(--font-semibold);
+      text-decoration: underline;
+    }
+
+    .help-link:focus {
+      box-shadow: inset 0 0 0 1px var(--color-primary);
+      border-radius: 4px;
+    }
   }
 
   .social {
@@ -104,6 +133,10 @@
 
       img {
         width: 20px;
+      }
+
+      &:focus {
+        border-color: var(--color-primary);
       }
     }
   }

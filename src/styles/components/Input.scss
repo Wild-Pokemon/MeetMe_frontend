@@ -1,3 +1,5 @@
+@import "@styles/mixin";
+
 .input-container {
   label {
     display: block;
@@ -18,6 +20,10 @@
       color: var(--color-gray-50);
       font-weight: var(--font-regular);
     }
+
+    &:focus {
+      border-color: var(--color-primary);
+    }
   }
 
   .small {
@@ -30,5 +36,26 @@
     height: 50px;
     padding: 0 14px;
     font-size: 1.4rem;
+  }
+
+  .true {
+    border-color: var(--color-error);
+
+    &:focus {
+      border-color: var(--color-error);
+    }
+  }
+
+  p {
+    color: var(--color-error);
+    margin-top: 8px;
+
+    &.small-message {
+      @include font(1.2rem, 1.6rem, var(--font-regular));
+    }
+
+    &.large-message {
+      @include font(1.4rem, 1.6rem, var(--font-regular));
+    }
   }
 }

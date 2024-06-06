@@ -9,16 +9,23 @@ function Login() {
   const {
     register,
     handleSubmit,
-    // formState: { errors },
+    formState: { errors },
     // setError,
   } = useForm();
 
-  const onSubmit = async (formData) => {
+  const onSubmit = (formData) => {
     console.log(formData);
   };
 
   const handleCheck = () => {
     setIsChecked(!isChecked);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleCheck();
+    }
   };
 
   return (
@@ -29,6 +36,8 @@ function Login() {
           type="email"
           id="email"
           placeholder="이메일을 입력하세요"
+          error={errors.email ? true : false}
+          message={errors.email && errors.email.message}
           {...register("email", {
             required: "이메일을 입력해 주세요.",
             pattern: {
@@ -44,6 +53,8 @@ function Login() {
           type="password"
           id="password"
           placeholder="비밀번호를 입력하세요"
+          error={errors.password ? true : false}
+          message={errors.password && errors.password.message}
           {...register("password", {
             required: "비밀번호를 입력해 주세요.",
           })}
@@ -57,8 +68,11 @@ function Login() {
             id="keepLogin"
             checked={isChecked}
             onChange={handleCheck}
+            {...register("keeplogin")}
           />
-          <label htmlFor="keepLogin">로그인 상태 유지</label>
+          <label htmlFor="keepLogin" tabIndex={0} onKeyDown={handleKeyDown}>
+            로그인 상태 유지
+          </label>
         </div>
 
         <button type="submit">로그인</button>
@@ -69,8 +83,12 @@ function Login() {
       </Link>
 
       <div className="help">
-        <Link to="/users/help/emailInq">이메일 찾기</Link>
-        <Link to="/users/help/pwInq">비밀번호 찾기</Link>
+        <Link className="help-link" to="/users/help/emailInq">
+          이메일 찾기
+        </Link>
+        <Link className="help-link" to="/users/help/pwInq">
+          비밀번호 찾기
+        </Link>
       </div>
 
       <div className="social">
