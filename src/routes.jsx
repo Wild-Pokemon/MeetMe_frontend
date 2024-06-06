@@ -4,6 +4,7 @@ import MainPage from "@pages/MainPage";
 import Calender from "@pages/calender/Calender";
 import FriendListPage from "@pages/friends/FriendListPage";
 import Login from "@pages/users/Login";
+import Signup from "@pages/users/Signup";
 import { Navigate, createBrowserRouter } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "users/login",
         element: <Login />,
+      },
+      {
+        path: "users/signup",
+        element: <Signup />,
       },
       {
         path: "friends",
