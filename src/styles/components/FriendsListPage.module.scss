@@ -1,0 +1,66 @@
+.friendListPage {
+  padding-left: 24px;
+  padding-right: 24px;
+  margin-top: 30px;
+
+  .flexContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .flexItem:first-child {
+      flex: 8; /* 80% 비율 */
+    }
+
+    .flexItem:nth-child(2) {
+      flex: 1;
+      margin-right: 34px;
+    }
+    .flexItem:nth-child(3) {
+      flex: 1; /* 10% 비율 */
+    }
+
+    h1 {
+      font-size: 24px;
+    }
+
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  .searchContainer {
+    position: relative;
+    width: 100%;
+    margin-top: 30px;
+
+    .inputContent {
+      width: 100%;
+      padding: 17px 14px;
+      box-sizing: border-box;
+      border: 1px solid #bdbdbd;
+      border-radius: 4px;
+    }
+
+    .searchIcon {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 24px;
+      pointer-events: none;
+    }
+  }
+  .edit {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+    p {
+      font-size: 14px;
+      color: #828282;
+    }
+  }
+}
