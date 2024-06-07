@@ -1,0 +1,181 @@
+@import "@styles/mixin";
+
+.login_wrapper {
+  flex-grow: 1;
+  padding: 0 24px;
+  box-sizing: border-box;
+  transition: all 0.3s;
+
+  h1 {
+    @include font(2.4rem, 1.2, var(--font-semibold));
+    margin-top: 50px;
+    text-align: center;
+  }
+
+  form {
+    @include flex-vertical(20px);
+    margin-top: 30px;
+  }
+
+  .input-container {
+    & label {
+      @include font(1.6rem, 1.3, var(--font-semibold));
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    & p {
+      @include font(1.4rem, 1.6rem, var(--font-regular));
+      color: var(--color-error);
+      margin-top: 8px;
+    }
+  }
+
+  .checkbox {
+    & input {
+      display: none;
+    }
+
+    & label {
+      @include font(1.2rem, 1.6rem, var(--font-regular));
+      @include flex-horizontal(10px);
+      color: var(--color-gray-50);
+      position: relative;
+      align-items: center;
+      cursor: pointer;
+      outline: none;
+    }
+
+    & label:focus {
+      border-radius: 4px;
+      box-shadow: inset 0 0 0 1px var(--color-primary);
+    }
+
+    & label::before {
+      content: "";
+      width: 20px;
+      height: 20px;
+      background-color: #fff;
+      border: 1px solid var(--color-gray-30);
+      border-radius: 50%;
+      box-sizing: border-box;
+      cursor: pointer;
+    }
+
+    & input:checked + label::before {
+      background-color: var(--color-primary);
+      border-color: var(--color-primary);
+    }
+
+    & input:checked + label::after {
+      content: "";
+      position: absolute;
+      width: 5px;
+      height: 10px;
+      top: 8px;
+      left: 10px;
+      transform: translate(-50%, -50%) rotate(45deg);
+      border-right: 1px solid #fff;
+      border-bottom: 1px solid #fff;
+    }
+  }
+
+  button {
+    @include font(1.6rem, 2rem, var(--font-regular));
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    text-align: center;
+    width: 100%;
+    height: 40px;
+    border-radius: 20px;
+  }
+
+  .signup {
+    @include center-xy;
+    @include font(1.6rem, 2rem, var(--font-regular));
+    background-color: var(--color-secondary);
+    color: var(--color-white);
+    width: 100%;
+    height: 40px;
+    border-radius: 20px;
+    margin: 10px 0;
+    outline: none;
+
+    &:focus {
+      box-shadow: inset 0 0 0 2px var(--color-primary);
+    }
+  }
+
+  .help {
+    @include center-xy(20px);
+    @include font(1.2rem, 1.6rem, var(--font-regular));
+    color: var(--color-gray-50);
+    margin-bottom: 30px;
+    outline: none;
+
+    .help-link {
+      outline: none;
+      padding: 2px;
+      box-sizing: border-box;
+    }
+
+    .help-link:hover {
+      font-weight: var(--font-semibold);
+      text-decoration: underline;
+    }
+
+    .help-link:focus {
+      box-shadow: inset 0 0 0 1px var(--color-primary);
+      border-radius: 4px;
+    }
+  }
+
+  .social {
+    @include center-xy(50px);
+    margin-bottom: 50px;
+
+    button {
+      @include center-xy();
+      min-width: 0;
+      flex-shrink: 0;
+      background-color: var(--color-white);
+      width: 50px;
+      height: 50px;
+      border: 1px solid var(--color-gray-30);
+      border-radius: 50%;
+      box-sizing: border-box;
+
+      img {
+        width: 20px;
+      }
+
+      &:focus {
+        border-color: var(--color-primary);
+      }
+    }
+  }
+
+  @include tablet {
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: unset;
+
+    h1 {
+      margin-top: 80px;
+    }
+
+    form {
+      margin-top: 50px;
+      gap: 30px;
+    }
+
+    .signup {
+      margin: 30px 0;
+    }
+
+    .help {
+      margin-bottom: 80px;
+    }
+  }
+}
