@@ -1,8 +1,8 @@
 import { RouterProvider } from "react-router-dom";
 import router from "@/routes";
-import "@styles/App.module.scss";
 import { Suspense } from "react";
 import Loading from "@components/loading/Loading";
+import "@styles/App.scss";
 
 function App() {
   return (

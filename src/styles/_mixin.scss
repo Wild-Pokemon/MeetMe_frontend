@@ -1,0 +1,41 @@
+@mixin mobile {
+  @media (max-width: 639px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: 640px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: 1280px) {
+    @content;
+  }
+}
+
+@mixin flex-horizontal($gap) {
+  display: flex;
+  gap: $gap;
+}
+
+@mixin flex-vertical($gap) {
+  @include flex-horizontal($gap);
+  flex-direction: column;
+}
+
+@mixin center-xy($gap: 0px) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: $gap;
+}
+
+@mixin font($size, $height, $weight) {
+  font-size: $size;
+  line-height: $height;
+  font-weight: $weight;
+  letter-spacing: $size * -0.03;
+}

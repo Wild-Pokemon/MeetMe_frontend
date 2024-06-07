@@ -1,19 +1,33 @@
 import PropTypes from "prop-types";
+import "@styles/components/Input.scss";
+import { forwardRef } from "react";
 
-function Input({ children, type, id, placeholder, ...rest }) {
-  return (
-    <div>
-      <label htmlFor={id}>{children}</label>
-      <input type={type} id={id} placeholder={placeholder} {...rest} />
-    </div>
-  );
-}
+const Input = forwardRef(
+  (
+    { type = "text", id, placeholder, size = "large", error = false, ...rest },
+    ref
+  ) => {
+    return (
+      <input
+        ref={ref}
+        className={`${size} ${error}`}
+        type={type}
+        id={id}
+        placeholder={placeholder}
+        {...rest}
+      />
+    );
+  }
+);
+
+Input.displayName = "Input";
 
 Input.propTypes = {
-  children: PropTypes.node.isRequired,
+  size: PropTypes.string,
   type: PropTypes.string,
-  id: PropTypes.string,
+  id: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
+  error: PropTypes.bool,
 };
 
 export default Input;
