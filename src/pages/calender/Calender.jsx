@@ -10,9 +10,16 @@ import {
   endOfMonth,
   differenceInCalendarDays,
   addDays,
+  isSameMonth,
 } from "date-fns";
+import nextIcon from "@assets/calendar_next.svg";
+import prevIcon from "@assets/calendar_prev.svg";
+import promiseInactive from "@assets/promise_inactive.svg";
+import "@styles/pages/calender/Calender.scss";
+import CalenderModal from "./CalenderModal";
 
 function Calender() {
+  const [isModal, setIsModal] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
 
   const year = getYear(currentDate);
@@ -21,42 +28,82 @@ function Calender() {
   const startDate = startOfWeek(monthStart);
   const endDate = endOfWeek(monthEnd);
 
+  const weekList = ["일", "월", "화", "수", "목", "금", "토"];
+  const weeks = weekList.map((item, i) => (
+    <div className="calender-weeks-item" key={i}>
+      {item}
+    </div>
+  ));
+
   const createMonth = useMemo(() => {
     const monthArray = [];
     let day = startDate;
-    while (differenceInCalendarDays(endDate, day) >= 0) {
-      monthArray.push(day);
-      day = addDays(day, 1);
+    for (
+      let currentDay = day;
+      differenceInCalendarDays(endDate, currentDay) >= 0;
+      currentDay = addDays(currentDay, 1)
+    ) {
+      monthArray.push(currentDay);
     }
     return monthArray;
   }, [startDate, endDate]);
 
-  const day = createMonth.map((item, i) => <p key={i}>{format(item, "d")}</p>);
+  const days = createMonth.map((item, i) => {
+    const isCurrentMonth = isSameMonth(item, currentDate);
+    return (
+      <div
+        className={` ${
+          isCurrentMonth ? "calender-days-item" : "calender-days-item type-gray"
+        }`}
+        key={i}
+      >
+        {format(item, "d")}
+        <div className="calender-days-cover">
+          <img
+            className="calender-days-src"
+            src={promiseInactive}
+            alt="약속 없음(지남)"
+          />
+        </div>
+      </div>
+    );
+  });
 
-  const prev = useCallback(() => {
+  const prevMonth = useCallback(() => {
     setCurrentDate(subMonths(currentDate, 1));
   }, [currentDate]);
 
-  const next = useCallback(() => {
+  const nextMonth = useCallback(() => {
     setCurrentDate(addMonths(currentDate, 1));
   }, [currentDate]);
 
-  const weekList = ["일", "월", "화", "수", "목", "금", "토"];
-  const week = weekList.map((item, i) => <p key={i}>{item}</p>);
-
   return (
     <div>
-      <button type="button" onClick={prev}>
-        이전달
-      </button>
-      <p>
-        {year}년{format(currentDate, "M")}월
-      </p>
-      <button type="button" onClick={next}>
-        다음달
-      </button>
-      {week}
-      {day}
+      {isModal ? <CalenderModal /> : ""}
+      <div className="calender-wrapper">
+        <div className="calender-header">
+          <h2 className="calender-month">
+            {year}년{format(currentDate, "M")}월
+          </h2>
+          <button
+            className="calender-prev-btn"
+            type="button"
+            onClick={prevMonth}
+          >
+            <img src={prevIcon} alt="이전달" />
+          </button>
+
+          <button
+            className="calender-next-btn"
+            type="button"
+            onClick={nextMonth}
+          >
+            <img src={nextIcon} alt="다음달" />
+          </button>
+        </div>
+        <div className="calender-weeks">{weeks}</div>
+        <div className="calender-days">{days}</div>
+      </div>
     </div>
   );
 }
