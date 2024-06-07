@@ -1,10 +1,10 @@
-import styles from "@styles/components/FriendsListPage.module.scss";
+import styles from "@styles/pages/friends/FriendsListPage.module.scss";
 import { Link } from "react-router-dom";
 import searchIcon from "@assets/search.svg";
 
 import addFriendsIcon from "@assets/addfriends.svg";
 import notificationIcon from "@assets/notification.svg";
-import MyFriendsPage from "./MyFriendPage";
+import MyFriendsPage from "@pages/friends/MyFriendPage";
 import Button from "@components/Button";
 
 function FriendListPage() {

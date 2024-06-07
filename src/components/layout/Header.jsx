@@ -49,7 +49,7 @@ function Header() {
         </div>
         <div className={styles.menu_item}>
           <img src={scheduleIcon} alt="Schedule" />
-          <Link to="/schedule">스케줄관리</Link>
+          <Link to="/calendar">스케줄관리</Link>
         </div>
         <div className="">
           <Button text={"로그아웃"} size={"extraSmall"}></Button>

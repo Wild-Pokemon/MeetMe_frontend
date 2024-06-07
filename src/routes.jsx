@@ -1,7 +1,7 @@
 import Layout from "@components/layout/Layout";
 import ErrorPage from "@pages/ErrorPage";
 import MainPage from "@pages/MainPage";
-import Calender from "@pages/calender/Calender";
+import Calender from "@pages/calendar/Calender";
 import FriendListPage from "@pages/friends/FriendListPage";
 import Login from "@pages/users/Login";
 import Signup from "@pages/users/Signup";
@@ -34,7 +34,7 @@ const router = createBrowserRouter([
         element: <FriendListPage />,
       },
       {
-        path: "calender",
+        path: "calendar",
         element: <Calender />,
       },
     ],

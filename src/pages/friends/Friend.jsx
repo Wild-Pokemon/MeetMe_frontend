@@ -1,5 +1,5 @@
 import profileImg from "@assets/profile.svg";
-import styles from "@styles/components/Friend.module.scss";
+import styles from "@styles/pages/friends/Friend.module.scss";
 
 function Friend() {
   return (

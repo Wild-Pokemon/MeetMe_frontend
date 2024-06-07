@@ -1,5 +1,5 @@
 import Friend from "./Friend";
-import styles from "@styles/components/MyFriendsPage.module.scss";
+import styles from "@styles/pages/friends/MyFriendsPage.module.scss";
 
 function MyFriendsPage() {
   return (
