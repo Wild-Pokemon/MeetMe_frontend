@@ -1,3 +1,4 @@
+import "@styles/pages/calendar/Calendar.scss";
 import { useCallback, useMemo, useState } from "react";
 import {
   getYear,
@@ -15,10 +16,9 @@ import {
 import nextIcon from "@assets/calendar_next.svg";
 import prevIcon from "@assets/calendar_prev.svg";
 import promiseInactive from "@assets/promise_inactive.svg";
-import "@styles/pages/calender/Calender.scss";
-import CalenderModal from "./CalenderModal";
+import CalendarModal from "./CalendarModal";
 
-function Calender() {
+function Calendar() {
   const [isModal, setIsModal] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
 
@@ -30,7 +30,7 @@ function Calender() {
 
   const weekList = ["일", "월", "화", "수", "목", "금", "토"];
   const weeks = weekList.map((item, i) => (
-    <div className="calender-weeks-item" key={i}>
+    <div className="calendar-weeks-item" key={i}>
       {item}
     </div>
   ));
@@ -53,14 +53,14 @@ function Calender() {
     return (
       <div
         className={` ${
-          isCurrentMonth ? "calender-days-item" : "calender-days-item type-gray"
+          isCurrentMonth ? "calendar-days-item" : "calendar-days-item type-gray"
         }`}
         key={i}
       >
         {format(item, "d")}
-        <div className="calender-days-cover">
+        <div className="calendar-days-cover">
           <img
-            className="calender-days-src"
+            className="calendar-days-src"
             src={promiseInactive}
             alt="약속 없음(지남)"
           />
@@ -79,14 +79,14 @@ function Calender() {
 
   return (
     <div>
-      {isModal ? <CalenderModal /> : ""}
-      <div className="calender-wrapper">
-        <div className="calender-header">
-          <h2 className="calender-month">
+      {isModal ? <CalendarModal /> : ""}
+      <div className="calendar-wrapper">
+        <div className="calendar-header">
+          <h2 className="calendar-month">
             {year}년{format(currentDate, "M")}월
           </h2>
           <button
-            className="calender-prev-btn"
+            className="calendar-prev-btn"
             type="button"
             onClick={prevMonth}
           >
@@ -94,18 +94,18 @@ function Calender() {
           </button>
 
           <button
-            className="calender-next-btn"
+            className="calendar-next-btn"
             type="button"
             onClick={nextMonth}
           >
             <img src={nextIcon} alt="다음달" />
           </button>
         </div>
-        <div className="calender-weeks">{weeks}</div>
-        <div className="calender-days">{days}</div>
+        <div className="calendar-weeks">{weeks}</div>
+        <div className="calendar-days">{days}</div>
       </div>
     </div>
   );
 }
 
-export default Calender;
+export default Calendar;
