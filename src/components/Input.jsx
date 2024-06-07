@@ -8,16 +8,14 @@ const Input = forwardRef(
     ref
   ) => {
     return (
-      <div className="input-container">
-        <input
-          ref={ref}
-          className={`${size} ${error}`}
-          type={type}
-          id={id}
-          placeholder={placeholder}
-          {...rest}
-        />
-      </div>
+      <input
+        ref={ref}
+        className={`${size} ${error}`}
+        type={type}
+        id={id}
+        placeholder={placeholder}
+        {...rest}
+      />
     );
   }
 );
