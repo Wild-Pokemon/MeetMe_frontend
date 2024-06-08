@@ -18,7 +18,26 @@ function Signup() {
     console.log(formData);
   };
 
-  // const handleSelect = () => {};
+  const handleSelect = (e) => {
+    console.log(e.target.value);
+    setIsOpen(false);
+  };
+
+  const emailData = [
+    "naver.com",
+    "google.com",
+    "hanmail.net",
+    "nate.com",
+    "직접 입력",
+  ];
+
+  const emailOptions = emailData.map((item, index) => (
+    <li key={index}>
+      <button value={item} onClick={handleSelect}>
+        {item}
+      </button>
+    </li>
+  ));
 
   const handleClick = () => {
     setIsOpen(!isOpen);
@@ -41,10 +60,12 @@ function Signup() {
             type="text"
             id="name"
             placeholder="이름을 입력하세요."
+            error={errors.name ? true : false}
             {...register("name", {
               required: "이름을 입력해 주세요.",
             })}
           />
+          {errors.name && <p>{errors.name.message}</p>}
         </div>
         <div className="input-container">
           <label htmlFor="email">이메일</label>
@@ -53,6 +74,7 @@ function Signup() {
               type="text"
               id="email"
               placeholder="이메일을 입력하세요."
+              error={errors.email ? true : false}
               {...register("email", {
                 required: "이메일을 입력해 주세요.",
               })}
@@ -68,9 +90,10 @@ function Signup() {
                 <p>-- 이메일 선택 --</p>
                 <img src="/src/assets/down.svg" alt="메뉴 토글" />
               </div>
-              {isOpen && <div className="options">Options</div>}
+              {isOpen && <ul className="options">{emailOptions}</ul>}
             </div>
           </div>
+          {errors.email && <p>{errors.email.message}</p>}
         </div>
 
         <div className="input-container">
@@ -81,7 +104,7 @@ function Signup() {
             placeholder="영문 대/소문자, 숫자, 특수문자를 포함하여 8글자 이상 입력하세요."
             error={errors.password ? true : false}
             {...register("password", {
-              required: "비밀번호를 입력하세요.",
+              required: "비밀번호를 입력해 주세요.",
               pattern: {
                 value:
                   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
@@ -100,7 +123,7 @@ function Signup() {
             placeholder="비밀번호를 한 번 더 입력하세요."
             error={errors.passwordConfirm ? true : false}
             {...register("passwordConfirm", {
-              required: "비밀번호를 한번 더 입력해 주세요.",
+              required: "비밀번호를 한 번 더 입력해 주세요.",
               validate: {
                 check: (val) => {
                   if (getValues("password") !== val) {
@@ -122,7 +145,7 @@ function Signup() {
             maxLength="11"
             error={errors.phone ? true : false}
             {...register("phone", {
-              required: "휴대폰 번호를 입력하세요.",
+              required: "휴대폰 번호를 입력해 주세요.",
               pattern: {
                 value: /^(01[016789]{1})-?[0-9]{3,4}-?[0-9]{4}$/,
                 message: "번호를 정확히 입력해 주세요.",
