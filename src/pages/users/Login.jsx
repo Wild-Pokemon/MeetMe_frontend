@@ -85,10 +85,10 @@ function Login() {
       </Link>
 
       <div className="help">
-        <Link className="help-link" to="/users/help/emailInq">
+        <Link className="help-link" to="/users/help/emailSearch">
           이메일 찾기
         </Link>
-        <Link className="help-link" to="/users/help/pwInq">
+        <Link className="help-link" to="/users/help/pwSearch">
           비밀번호 찾기
         </Link>
       </div>

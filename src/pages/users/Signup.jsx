@@ -1,3 +1,4 @@
+import Button from "@components/Button";
 import Input from "@components/Input";
 import "@styles/pages/users/Signup.scss";
 import { useState } from "react";
@@ -43,6 +44,10 @@ function Signup() {
     setIsOpen(!isOpen);
   };
 
+  const handleCheck = () => {
+    console.log("이메일 중복확인");
+  };
+
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -70,6 +75,12 @@ function Signup() {
         <div className="input-container">
           <label htmlFor="email">이메일</label>
           <div className="email-container">
+            <Button
+              type="button"
+              text="중복확인"
+              size="extraSmall"
+              onClick={handleCheck}
+            />
             <Input
               type="text"
               id="email"
@@ -155,9 +166,7 @@ function Signup() {
           {errors.phone && <p>{errors.phone.message}</p>}
         </div>
 
-        <button className="signup" type="submit">
-          회원가입
-        </button>
+        <Button type="submit" size="large" text="회원가입" />
       </form>
     </div>
   );

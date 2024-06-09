@@ -27,6 +27,13 @@ input {
     font-size: 1.4rem;
   }
 
+  &.number {
+    height: 60px;
+    padding: 0 2px;
+    font-size: 2rem;
+    text-align: center;
+  }
+
   &.true {
     border-color: var(--color-error);
 

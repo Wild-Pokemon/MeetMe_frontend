@@ -3,6 +3,11 @@ import ErrorPage from "@pages/ErrorPage";
 import MainPage from "@pages/MainPage";
 import Calender from "@pages/calendar/Calender";
 import FriendListPage from "@pages/friends/FriendListPage";
+import EmailAuth from "@pages/help/EmailAuth";
+import EmailSearch from "@pages/help/EmailSearch";
+import EmailSearchResult from "@pages/help/EmailSearchResult";
+import PWReset from "@pages/help/PWReset";
+import PWSearch from "@pages/help/PWSearch";
 import MyPage from "@pages/mypage/MyPage";
 import MyPageAuth from "@pages/mypage/MyPageAuth";
 import MyPageEdit from "@pages/mypage/MyPageEdit";
@@ -32,6 +37,26 @@ const router = createBrowserRouter([
       {
         path: "users/signup",
         element: <Signup />,
+      },
+      {
+        path: "users/help/emailSearch",
+        element: <EmailSearch />,
+      },
+      {
+        path: "users/help/emailResult",
+        element: <EmailSearchResult />,
+      },
+      {
+        path: "users/help/pwSearch",
+        element: <PWSearch />,
+      },
+      {
+        path: "users/help/emailAuth",
+        element: <EmailAuth />,
+      },
+      {
+        path: "users/help/pwReset",
+        element: <PWReset />,
       },
       {
         path: "mypage",
