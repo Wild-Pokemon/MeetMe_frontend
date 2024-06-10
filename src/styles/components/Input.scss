@@ -6,6 +6,10 @@ input {
   box-sizing: border-box;
   border: 1px solid var(--color-gray-30);
 
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
   &::placeholder {
     color: var(--color-gray-50);
     font-weight: var(--font-regular);
@@ -41,4 +45,8 @@ input {
       border-color: var(--color-error);
     }
   }
+}
+
+input:disabled {
+  background-color: var(--color-gray-10);
 }
