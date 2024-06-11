@@ -9,12 +9,11 @@ function Button({
   onClick,
   className,
 }) {
-  
   const colorMap = {
     color1: "#A4DCF9", // 기본 색상
     color2: "#F2994A", // 오렌지 색상
   };
-  
+
   const buttonStyle = {
     backgroundColor: colorMap[color] || colorMap.color1,
   };
@@ -34,7 +33,7 @@ function Button({
 }
 
 Button.propTypes = {
-  type: Proptypes.string,
+  type: PropTypes.string,
   text: PropTypes.string.isRequired,
   color: PropTypes.oneOf(["color1", "color2"]),
   size: PropTypes.string.isRequired,
