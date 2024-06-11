@@ -16,14 +16,18 @@ function Header() {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
     <div
       className={`${styles.header} ${isMenuOpen ? styles.headerexpanded : ""}`}
     >
       <div className={styles.header_wrapper}>
         <div className={styles.header_logo}>
-          <Link to={"/"}>
-            <img src={meetmeLogo} alt="MeetMe Logo" className="" />
+          <Link to={"/"} onClick={closeMenu}>
+            <img src={meetmeLogo} alt="MeetMe Logo" />
           </Link>
         </div>
         <div className={styles.header_menu}>
@@ -39,19 +43,23 @@ function Header() {
       >
         <div className={styles.menu_item}>
           <img src={myPageIcon} alt="My Page" />
-          <Link to="/mypage" className="text-1">
+          <Link to="/mypage" className="text-1" onClick={closeMenu}>
             마이페이지
           </Link>
         </div>
         <div className={styles.menu_item}>
           <img src={friendsIcon} alt="Friends" />
-          <Link to="/friends">친구관리</Link>
+          <Link to="/friends" onClick={closeMenu}>
+            친구관리
+          </Link>
         </div>
         <div className={styles.menu_item}>
           <img src={scheduleIcon} alt="Schedule" />
-          <Link to="/calendar">스케줄관리</Link>
+          <Link to="/calendar" onClick={closeMenu}>
+            스케줄관리
+          </Link>
         </div>
-        <div className="">
+        <div onClick={closeMenu}>
           <Button text={"로그아웃"} size={"extraSmall"}></Button>
         </div>
       </div>

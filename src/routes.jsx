@@ -2,10 +2,20 @@ import Layout from "@components/layout/Layout";
 import ErrorPage from "@pages/ErrorPage";
 import MainPage from "@pages/MainPage";
 import Calendar from "@pages/calendar/Calendar";
-import FriendListPage from "@pages/friends/FriendListPage";
 import PromiseDetail from "@pages/promise/PromiseDetail";
 import PromiseEdit from "@pages/promise/PromiseEdit";
 import PromiseNew from "@pages/promise/PromiseNew";
+import Mail from "@pages/friends/Mail";
+import FriendListPage from "@pages/friends/FriendListPage";
+import EmailAuth from "@pages/help/EmailAuth";
+import EmailSearch from "@pages/help/EmailSearch";
+import EmailSearchResult from "@pages/help/EmailSearchResult";
+import PWReset from "@pages/help/PWReset";
+import PWSearch from "@pages/help/PWSearch";
+import MyPage from "@pages/mypage/MyPage";
+import MyPageAuth from "@pages/mypage/MyPageAuth";
+import MyPageEdit from "@pages/mypage/MyPageEdit";
+import MyPageMain from "@pages/mypage/MyPageMain";
 import Login from "@pages/users/Login";
 import Signup from "@pages/users/Signup";
 import { Navigate, createBrowserRouter } from "react-router-dom";
@@ -33,8 +43,50 @@ const router = createBrowserRouter([
         element: <Signup />,
       },
       {
+        path: "users/help/emailSearch",
+        element: <EmailSearch />,
+      },
+      {
+        path: "users/help/emailResult",
+        element: <EmailSearchResult />,
+      },
+      {
+        path: "users/help/pwSearch",
+        element: <PWSearch />,
+      },
+      {
+        path: "users/help/emailAuth",
+        element: <EmailAuth />,
+      },
+      {
+        path: "users/help/pwReset",
+        element: <PWReset />,
+      },
+      {
+        path: "mypage",
+        element: <MyPage />,
+        children: [
+          {
+            index: true,
+            element: <MyPageMain />,
+          },
+          {
+            path: "auth",
+            element: <MyPageAuth />,
+          },
+          {
+            path: "edit",
+            element: <MyPageEdit />,
+          },
+        ],
+      },
+      {
         path: "friends",
         element: <FriendListPage />,
+      },
+      {
+        path: "friends/mail",
+        element: <Mail />,
       },
       {
         path: "calendar",
