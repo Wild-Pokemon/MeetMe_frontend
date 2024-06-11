@@ -16,12 +16,12 @@
   }
 }
 
-@mixin flex-horizontal($gap) {
+@mixin flex-horizontal($gap: 0px) {
   display: flex;
   gap: $gap;
 }
 
-@mixin flex-vertical($gap) {
+@mixin flex-vertical($gap: 0px) {
   @include flex-horizontal($gap);
   flex-direction: column;
 }
