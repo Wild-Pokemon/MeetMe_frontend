@@ -15,8 +15,8 @@ import {
 } from "date-fns";
 import nextIcon from "@assets/calendar_next.svg";
 import prevIcon from "@assets/calendar_prev.svg";
-import promiseInactive from "@assets/promise_inactive.svg";
-import CalendarModal from "./CalendarModal";
+import CalendarModal from "@pages/calendar/CalendarModal";
+// import promiseInactive from "@assets/promise_inactive.svg";
 
 function Calendar() {
   const [isModal, setIsModal] = useState(false);
@@ -48,24 +48,37 @@ function Calendar() {
     return monthArray;
   }, [startDate, endDate]);
 
+  console.log(createMonth);
+
+  const handleOpenModal = () => {
+    setIsModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModal(false);
+  };
+
   const days = createMonth.map((item, i) => {
     const isCurrentMonth = isSameMonth(item, currentDate);
-    return (
-      <div
-        className={` ${
-          isCurrentMonth ? "calendar-days-item" : "calendar-days-item type-gray"
-        }`}
-        key={i}
-      >
+
+    return isCurrentMonth ? (
+      <div className="calendar-days-item" key={i} onClick={handleOpenModal}>
         {format(item, "d")}
-        <div className="calendar-days-cover">
+        <div className="calendar-days-item-info">
+          <p>11시 모각코 | 강남역12번 출구 | 홍길동외 3명</p>
+        </div>
+        {/* //일정만들기 달력 구현시 이미지로 표시
+         <div className="calendar-days-cover">
           <img
             className="calendar-days-src"
             src={promiseInactive}
             alt="약속 없음(지남)"
           />
         </div>
+        */}
       </div>
+    ) : (
+      <div className="calendar-days-null" key={i}></div>
     );
   });
 
@@ -79,7 +92,7 @@ function Calendar() {
 
   return (
     <div>
-      {isModal ? <CalendarModal /> : ""}
+      {isModal && <CalendarModal handleCloseModal={handleCloseModal} />}
       <div className="calendar-wrapper">
         <div className="calendar-header">
           <h2 className="calendar-month">
