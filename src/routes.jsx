@@ -1,7 +1,10 @@
 import Layout from "@components/layout/Layout";
 import ErrorPage from "@pages/ErrorPage";
 import MainPage from "@pages/MainPage";
-import Calender from "@pages/calendar/Calender";
+import Calendar from "@pages/calendar/Calendar";
+import PromiseDetail from "@pages/promise/PromiseDetail";
+import PromiseEdit from "@pages/promise/PromiseEdit";
+import PromiseNew from "@pages/promise/PromiseNew";
 import Mail from "@pages/friends/Mail";
 import FriendListPage from "@pages/friends/FriendListPage";
 import EmailAuth from "@pages/help/EmailAuth";
@@ -87,7 +90,19 @@ const router = createBrowserRouter([
       },
       {
         path: "calendar",
-        element: <Calender />,
+        element: <Calendar />,
+      },
+      {
+        path: "promise",
+        element: <PromiseNew />,
+      },
+      {
+        path: "promise/detail",
+        element: <PromiseDetail />,
+      },
+      {
+        path: "promise/edit",
+        element: <PromiseEdit />,
       },
     ],
   },
