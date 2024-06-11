@@ -1,5 +1,5 @@
 import Input from "@components/Input";
-import "@styles/pages/users/Login.scss";
+import styles from "@styles/pages/users/Login.module.scss";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
@@ -29,10 +29,10 @@ function Login() {
   };
 
   return (
-    <div className="login_wrapper">
+    <div className={styles.login_wrapper}>
       <h1>로그인</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="input-container">
+        <div className={styles.input_container}>
           <label htmlFor="email">이메일</label>
           <Input
             type="email"
@@ -50,7 +50,7 @@ function Login() {
           {errors.email && <p>{errors.email.message}</p>}
         </div>
 
-        <div className="input-container">
+        <div className={styles.inputContainer}>
           <label htmlFor="password">비밀번호</label>
           <Input
             type="password"
@@ -64,7 +64,7 @@ function Login() {
           {errors.password && <p>{errors.password.message}</p>}
         </div>
 
-        <div className="checkbox">
+        <div className={styles.checkbox}>
           <input
             type="checkbox"
             id="keepLogin"
@@ -80,20 +80,20 @@ function Login() {
         <button type="submit">로그인</button>
       </form>
 
-      <Link className="signup" to="/users/signup">
+      <Link className={styles.signup} to="/users/signup">
         회원가입
       </Link>
 
-      <div className="help">
-        <Link className="help-link" to="/users/help/emailSearch">
+      <div className={styles.help}>
+        <Link className={styles.help_link} to="/users/help/emailSearch">
           이메일 찾기
         </Link>
-        <Link className="help-link" to="/users/help/pwSearch">
+        <Link className={styles.help_link} to="/users/help/pwSearch">
           비밀번호 찾기
         </Link>
       </div>
 
-      <div className="social">
+      <div className={styles.social}>
         <button type="button">
           <i className="ir">구글 계정으로 로그인</i>
           <img src="/src/assets/google.svg" alt="구글 로그인" />
