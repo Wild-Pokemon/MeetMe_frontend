@@ -59,6 +59,7 @@
     align-items: start;
     gap: 20px;
     padding: 15px;
+
     &.menu_itemsopen {
       display: flex; // 메뉴가 열릴 때 보임
     }
@@ -72,6 +73,23 @@
         height: 24px;
         margin-right: 24px;
       }
+    }
+  }
+}
+
+@media (min-width: 640px) {
+  .header {
+    .header_menu {
+      display: none;
+    }
+
+    .menu_items {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+    &_wrapper {
+      width: 10%;
     }
   }
 }
