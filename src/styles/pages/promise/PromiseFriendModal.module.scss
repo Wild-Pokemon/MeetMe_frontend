@@ -1,4 +1,4 @@
-.modal-wrapper {
+.modal_wrapper {
   position: fixed;
   background-color: rgb(0 0 0 / 0.8);
   z-index: 1;
@@ -10,7 +10,7 @@
   overflow: hidden;
   padding: 0 24px;
 
-  .promise-modal {
+  .promise_modal {
     background-color: var(--color-white);
     max-width: 450px;
     width: 100%;
@@ -22,47 +22,44 @@
     border-radius: 20px;
     box-sizing: border-box;
 
-    .layout-btn {
-      margin: 0 auto;
-    }
-
-    .promise-modal-header {
+    .modalHeader {
       width: 100%;
       display: flex;
       padding-left: 10px;
       padding-bottom: 10px;
       margin-bottom: 10px;
       box-sizing: border-box;
-      gap: 1.2rem;
+      gap: 1rem;
       border-bottom: 1px solid var(--color-gray-30);
 
-      .promise-select-user {
+      .modalHeader_item {
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
         gap: 4px;
 
-        .select-user-src {
+        & img {
           width: 40px;
+        }
+
+        & p {
+          text-align: center;
+          font-size: 1.2rem;
+          line-height: 2rem;
+          font-weight: 600;
+          margin-top: 0;
+          color: var(--color-black);
         }
       }
     }
 
-    .select-user-name {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: var(--color-black);
-      margin: 0;
-    }
-
-    .promise-modal-contents {
+    .modalContent {
       width: 100%;
       display: flex;
       flex-direction: column;
       gap: 20px;
 
-      .promise-modal-list {
+      .modalList {
         display: flex;
         flex-direction: column;
         gap: 10px;
@@ -72,24 +69,33 @@
           font-weight: 600;
         }
 
-        .promise-modal-list-box {
+        .modalList_Box {
           border: 1px solid var(--color-gray-30);
           border-radius: 10px;
           height: 200px;
           overflow-y: auto;
 
-          .promise-modal-list-item {
+          .modalItem {
             display: flex;
-            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
             padding: 8px;
             padding-bottom: 4px;
             box-sizing: border-box;
             border-bottom: 1px solid var(--color-gray-30);
 
-            .promise-modal-list-info {
-              display: flex;
-              align-items: center;
-              gap: 10px;
+            .modalItem_src {
+              width: 32px;
+            }
+
+            & p {
+              text-align: center;
+              font-size: 1.2rem;
+              line-height: 2rem;
+              font-weight: 600;
+              margin-top: 0;
+              color: var(--color-black);
+              margin-right: auto;
             }
           }
         }

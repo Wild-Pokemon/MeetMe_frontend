@@ -1,4 +1,4 @@
-import "@styles/pages/calendar/Calendar.scss";
+import styles from "@styles/pages/calendar/Calendar.module.scss";
 import { useCallback, useMemo, useState } from "react";
 import {
   getYear,
@@ -30,7 +30,7 @@ function Calendar() {
 
   const weekList = ["일", "월", "화", "수", "목", "금", "토"];
   const weeks = weekList.map((item, i) => (
-    <div className="calendar-weeks-item" key={i}>
+    <div className={styles.weeksItem} key={i}>
       {item}
     </div>
   ));
@@ -48,8 +48,6 @@ function Calendar() {
     return monthArray;
   }, [startDate, endDate]);
 
-  console.log(createMonth);
-
   const handleOpenModal = () => {
     setIsModal(true);
   };
@@ -62,15 +60,13 @@ function Calendar() {
     const isCurrentMonth = isSameMonth(item, currentDate);
 
     return isCurrentMonth ? (
-      <div className="calendar-days-item" key={i} onClick={handleOpenModal}>
+      <div className={styles.daysItem} key={i} onClick={handleOpenModal}>
         {format(item, "d")}
-        <div className="calendar-days-item-info">
-          <p>11시 모각코 | 강남역12번 출구 | 홍길동외 3명</p>
-        </div>
+        <p>11시 모각코 | 강남역12번 출구 | 홍길동외 3명</p>
         {/* //일정만들기 달력 구현시 이미지로 표시
-         <div className="calendar-days-cover">
+         <div className={styles.daysCover}>
           <img
-            className="calendar-days-src"
+            className={daysSrc}
             src={promiseInactive}
             alt="약속 없음(지남)"
           />
@@ -78,7 +74,7 @@ function Calendar() {
         */}
       </div>
     ) : (
-      <div className="calendar-days-null" key={i}></div>
+      <div className={styles.daysItem_null} key={i}></div>
     );
   });
 
@@ -93,29 +89,21 @@ function Calendar() {
   return (
     <div>
       {isModal && <CalendarModal handleCloseModal={handleCloseModal} />}
-      <div className="calendar-wrapper">
-        <div className="calendar-header">
-          <h2 className="calendar-month">
+      <div className={styles.calendar_wrapper}>
+        <div className={styles.calendar_header}>
+          <h2>
             {year}년{format(currentDate, "M")}월
           </h2>
-          <button
-            className="calendar-prev-btn"
-            type="button"
-            onClick={prevMonth}
-          >
+          <button className={styles.prevBtn} type="button" onClick={prevMonth}>
             <img src={prevIcon} alt="이전달" />
           </button>
 
-          <button
-            className="calendar-next-btn"
-            type="button"
-            onClick={nextMonth}
-          >
+          <button className={styles.nextBtn} type="button" onClick={nextMonth}>
             <img src={nextIcon} alt="다음달" />
           </button>
         </div>
-        <div className="calendar-weeks">{weeks}</div>
-        <div className="calendar-days">{days}</div>
+        <div className={styles.weeksList}>{weeks}</div>
+        <div className={styles.daysList}>{days}</div>
       </div>
     </div>
   );
