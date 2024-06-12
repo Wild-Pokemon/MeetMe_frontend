@@ -1,5 +1,5 @@
 import Button from "@components/Button";
-import "@styles/pages/help/EmailSearchResult.scss";
+import styles from "@styles/pages/help/EmailSearchResult.module.scss";
 import { useNavigate } from "react-router-dom";
 
 function EmailSearchResult() {
@@ -10,14 +10,14 @@ function EmailSearchResult() {
   };
 
   return (
-    <div className="search-result-wrapper">
+    <div className={styles.search_result_wrapper}>
       <h1>이메일 찾기</h1>
 
-      <div className="search-result-container">
-        <p className="search-result-name">
+      <div className={styles.search_result_container}>
+        <p className={styles.search_result_name}>
           <span>홍길동</span> 님의 이메일은
         </p>
-        <p className="search-result-content">
+        <p className={styles.search_result_content}>
           <span>meetme@naver.com</span> 입니다.
         </p>
       </div>

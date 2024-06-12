@@ -1,6 +1,6 @@
 @import "@styles/mixin";
 
-.search-result-wrapper {
+.search_result_wrapper {
   flex-grow: 1;
   padding: 0 24px;
   box-sizing: border-box;
@@ -12,7 +12,7 @@
     text-align: center;
   }
 
-  .search-result-container {
+  .search_result_container {
     margin: 50px 0;
     width: 100%;
     padding: 30px;
@@ -23,7 +23,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
 
-    .search-result-name {
+    .search_result_name {
       @include font(1.6rem, 2rem, var(--font-regular));
       color: var(--color-gray-50);
       margin-bottom: 20px;
@@ -34,7 +34,7 @@
       }
     }
 
-    .search-result-content {
+    .search_result_content {
       @include font(1.8rem, 1.2, var(--font-regular));
       color: var(--color-gray-50);
 
@@ -55,7 +55,7 @@
       margin-top: 80px;
     }
 
-    .search-result-container {
+    .search_result_container {
       margin: 80px 0;
     }
   }

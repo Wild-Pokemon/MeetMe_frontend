@@ -1,42 +1,42 @@
 @import "@styles/mixin";
 
-.mypage-wrapper {
+.mypage_wrapper {
   flex-grow: 1;
   padding: 0 24px;
   box-sizing: border-box;
   transition: all 0.3s;
 
-  .profile-container {
+  .profile_container {
     margin-top: 50px;
     margin-bottom: 30px;
     text-align: center;
 
-    .profile-img {
+    .profile_img {
       width: 100px;
       aspect-ratio: 1/1;
       margin-bottom: 30px;
     }
 
-    .profile-name {
+    .profile_name {
       @include font(2.4rem, 1.2, var(--font-semibold));
     }
   }
 
-  .info-container {
+  .info_container {
     @include flex-vertical(20px);
 
-    .info-title {
+    .info_title {
       @include font(1.6rem, 1.3, var(--font-semibold));
       margin-bottom: 10px;
     }
 
-    .info-content {
+    .info_content {
       @include font(1.6rem, 1.3, var(--font-regular));
       color: var(--color-gray-50);
     }
   }
 
-  .profile-edit-button {
+  .profile_edit_button {
     margin-top: 70px;
   }
 
@@ -46,25 +46,25 @@
     margin: 0 auto;
     padding: unset;
 
-    .profile-container {
+    .profile_container {
       margin-top: 70px;
       margin-bottom: 50px;
 
-      .profile-img {
+      .profile_img {
         width: 120px;
         margin-bottom: 50px;
       }
     }
 
-    .info-container {
+    .info_container {
       @include flex-vertical(30px);
 
-      .info-title {
+      .info_title {
         @include font(1.8rem, 1.3, var(--font-semibold));
         margin-bottom: 15px;
       }
 
-      .info-content {
+      .info_content {
         @include font(1.8rem, 1.3, var(--font-regular));
         color: var(--color-gray-50);
       }

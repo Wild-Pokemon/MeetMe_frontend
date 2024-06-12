@@ -1,6 +1,6 @@
 import Button from "@components/Button";
 import Input from "@components/Input";
-import "@styles/pages/help/PWReset.scss";
+import styles from "@styles/pages/help/PWReset.module.scss";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
@@ -20,13 +20,13 @@ function PWReset() {
   };
 
   return (
-    <div className="password-reset-wrapper">
+    <div className={styles.password_reset_wrapper}>
       <h1>비밀번호 재설정</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="input-container">
+        <div className={styles.input_container}>
           <label htmlFor="password">새로운 비밀번호</label>
           <Input
-            type="text"
+            type="password"
             id="password"
             placeholder="영문 대/소문자, 숫자, 특수문자를 포함하여 8글자 이상 입력하세요."
             error={errors.password ? true : false}
@@ -42,10 +42,10 @@ function PWReset() {
           {errors.password && <p>{errors.password.message}</p>}
         </div>
 
-        <div className="input-container">
+        <div className={styles.input_container}>
           <label htmlFor="password-confirm">비밀번호 확인</label>
           <Input
-            type="text"
+            type="password"
             id="password-confirm"
             placeholder="비밀번호를 한 번 더 입력하세요."
             error={errors.passwordConfirm ? true : false}
