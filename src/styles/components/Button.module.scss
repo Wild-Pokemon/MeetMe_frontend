@@ -3,7 +3,7 @@
 
 .button {
   border: none;
-  border-radius: 20px;
+  border-radius: 2rem;
   color: #fff;
   cursor: pointer;
   text-align: center;
@@ -11,33 +11,33 @@
   @include font(1.4rem, 1.6rem, var(--font-semibold));
 
   &--superSmall {
-    width: 40px;
-    height: 16px;
-    font-size: 10px;
+    width: 4rem;
+    height: 1.6rem;
+    font-size: 1rem;
   }
 
   &--extraSmall {
-    width: 80px;
-    height: 30px;
+    width: 8rem;
+    height: 3rem;
   }
 
   &--small {
-    width: 100px;
-    height: 30px;
+    width: 10rem;
+    height: 3rem;
   }
 
   &--medium {
-    width: 140px;
-    height: 30px;
+    width: 14rem;
+    height: 3rem;
   }
 
   &--normal {
-    width: 200px;
-    height: 30px;
+    width: 20rem;
+    height: 3rem;
   }
 
   &--large {
     width: 100%;
-    height: 40px;
+    height: 4rem;
   }
 }

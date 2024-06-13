@@ -60,7 +60,11 @@ function Header() {
           </Link>
         </div>
         <div onClick={closeMenu}>
-          <Button text={"로그아웃"} size={"extraSmall"}></Button>
+          <Button
+            text={"로그아웃"}
+            size={"extraSmall"}
+            className={styles.btn}
+          ></Button>
         </div>
       </div>
     </div>
