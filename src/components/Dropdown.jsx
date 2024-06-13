@@ -1,9 +1,15 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import PropTypes from "prop-types";
 import styles from "@styles/components/Dropdown.module.scss";
+import useClickOutside from "@hooks/useClickOutside.mjs";
 
 const Dropdown = ({ selectedValue, options, onSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useClickOutside(dropdownRef, () => {
+    setIsOpen(false);
+  });
 
   const handleClick = () => {
     setIsOpen(!isOpen);
@@ -15,7 +21,7 @@ const Dropdown = ({ selectedValue, options, onSelect }) => {
   };
 
   return (
-    <div className={styles.dropdown}>
+    <div className={styles.dropdown} ref={dropdownRef}>
       <button type="button" className={styles.select_box} onClick={handleClick}>
         <span>{selectedValue}</span>
         <img
@@ -40,7 +46,7 @@ const Dropdown = ({ selectedValue, options, onSelect }) => {
 };
 
 Dropdown.propTypes = {
-  selectedValue: PropTypes.string,
+  selectedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   options: PropTypes.array,
   onSelect: PropTypes.func,
 };
