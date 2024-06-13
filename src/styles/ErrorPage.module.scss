@@ -1,0 +1,54 @@
+@import "@styles/mixin";
+
+.error_wrapper {
+  display: flex;
+  align-items: center;
+  padding: 50px 24px;
+  box-sizing: border-box;
+  gap: 50px;
+  transition: all 0.5s;
+
+  .errorText {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: var(--color-secondary);
+    margin: auto;
+    & h1 {
+      font-size: 6rem;
+      font-weight: 900;
+    }
+
+    & p {
+      font-size: 3rem;
+      font-weight: 600;
+    }
+  }
+  & img {
+    width: 500px;
+  }
+
+  @include tablet {
+    width: 100%;
+    margin: auto;
+    max-width: 900px;
+  }
+
+  @include mobile {
+    flex-direction: column;
+
+    .errorText {
+      gap: 10px;
+      text-align: center;
+      & h1 {
+        font-size: 5rem;
+        font-weight: 900;
+      }
+
+      & p {
+        font-size: 2rem;
+        font-weight: 600;
+      }
+    }
+  }
+}
