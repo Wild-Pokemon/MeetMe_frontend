@@ -1,6 +1,6 @@
 import Button from "@components/Button";
 import Input from "@components/Input";
-import "@styles/pages/users/Signup.scss";
+import styles from "@styles/pages/users/Signup.module.scss";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -144,10 +144,10 @@ function Signup() {
   ));
 
   return (
-    <div className="signup-wrapper">
+    <div className={styles.signup_wrapper}>
       <h1>회원가입</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="input-container">
+        <div className={styles.input_container}>
           <label htmlFor="name">이름</label>
           <Input
             type="text"
@@ -160,11 +160,11 @@ function Signup() {
           />
           {errors.name && <p>{errors.name.message}</p>}
         </div>
-        <div className="input-container">
+        <div className={styles.input_container}>
           <label htmlFor="email">이메일</label>
-          <div className="email-container">
+          <div className={styles.email_container}>
             <Button
-              className="check-button"
+              className={styles.check_button}
               text="중복확인"
               size="extraSmall"
               onClick={handleCheck}
@@ -187,20 +187,20 @@ function Signup() {
               })}
               disabled={isDisabled}
             />
-            <div className="dropdown">
+            <div className={styles.dropdown}>
               <button
                 type="button"
-                className="select-box"
+                className={styles.select_box}
                 onClick={handleClick}
               >
                 <span>{domain}</span>
                 <img
-                  className={isOpen ? "opened" : ""}
+                  className={isOpen ? styles.opened : ""}
                   src="/src/assets/down.svg"
                   alt="메뉴 열기/닫기"
                 />
               </button>
-              {isOpen && <ul className="select-options">{options}</ul>}
+              {isOpen && <ul className={styles.select_options}>{options}</ul>}
             </div>
           </div>
           {(errors.email || errors.domain) && (
@@ -208,7 +208,7 @@ function Signup() {
           )}
         </div>
 
-        <div className="input-container">
+        <div className={styles.input_container}>
           <label htmlFor="password">비밀번호</label>
           <Input
             type="password"
@@ -227,7 +227,7 @@ function Signup() {
           {errors.password && <p>{errors.password.message}</p>}
         </div>
 
-        <div className="input-container">
+        <div className={styles.input_container}>
           <label htmlFor="password-confirm">비밀번호 확인</label>
           <Input
             type="password"
@@ -248,7 +248,7 @@ function Signup() {
           {errors.passwordConfirm && <p>{errors.passwordConfirm.message}</p>}
         </div>
 
-        <div className="input-container">
+        <div className={styles.input_container}>
           <label htmlFor="phone">전화번호</label>
           <Input
             type="text"
@@ -267,66 +267,68 @@ function Signup() {
           {errors.phone && <p>{errors.phone.message}</p>}
         </div>
 
-        <div className="input-container">
+        <div className={styles.input_container}>
           <label htmlFor="phone">생년월일</label>
-          <div className="select-container">
-            <div className="select-item">
-              <div className="dropdown">
+          <div className={styles.select_container}>
+            <div className={styles.select_item}>
+              <div className={styles.dropdown}>
                 <button
                   type="button"
-                  className="select-box"
+                  className={styles.select_box}
                   onClick={handleYearClick}
                 >
                   <span>{year}</span>
                   <img
-                    className={isYearOpen ? "opened" : ""}
+                    className={isYearOpen ? styles.opened : ""}
                     src="/src/assets/down.svg"
                     alt="메뉴 열기/닫기"
                   />
                 </button>
                 {isYearOpen && (
-                  <ul className="select-options">{yearOptions}</ul>
+                  <ul className={styles.select_options}>{yearOptions}</ul>
                 )}
               </div>
               <p>년</p>
             </div>
 
-            <div className="select-item">
-              <div className="dropdown">
+            <div className={styles.select_item}>
+              <div className={styles.dropdown}>
                 <button
                   type="button"
-                  className="select-box"
+                  className={styles.select_box}
                   onClick={handleMonthClick}
                 >
                   <span>{month}</span>
                   <img
-                    className={isMonthOpen ? "opened" : ""}
+                    className={isMonthOpen ? styles.opened : ""}
                     src="/src/assets/down.svg"
                     alt="메뉴 열기/닫기"
                   />
                 </button>
                 {isMonthOpen && (
-                  <ul className="select-options">{monthOptions}</ul>
+                  <ul className={styles.select_options}>{monthOptions}</ul>
                 )}
               </div>
               <p>월</p>
             </div>
 
-            <div className="select-item">
-              <div className="dropdown">
+            <div className={styles.select_item}>
+              <div className={styles.dropdown}>
                 <button
                   type="button"
-                  className="select-box"
+                  className={styles.select_box}
                   onClick={handleDayClick}
                 >
                   <span>{day}</span>
                   <img
-                    className={isDayOpen ? "opened" : ""}
+                    className={isDayOpen ? styles.opened : ""}
                     src="/src/assets/down.svg"
                     alt="메뉴 열기/닫기"
                   />
                 </button>
-                {isDayOpen && <ul className="select-options">{dayOptions}</ul>}
+                {isDayOpen && (
+                  <ul className={styles.select_options}>{dayOptions}</ul>
+                )}
               </div>
               <p>일</p>
             </div>

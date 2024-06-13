@@ -1,6 +1,6 @@
 import Button from "@components/Button";
 import Input from "@components/Input";
-import "@styles/pages/help/EmailAuth.scss";
+import styles from "@styles/pages/help/EmailAuth.module.scss";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
@@ -20,12 +20,12 @@ function EmailAuth() {
   };
 
   return (
-    <div className="email-auth-wrapper">
+    <div className={styles.email_auth_wrapper}>
       <h1>인증코드 입력하기</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="input-container">
+        <div className={styles.input_container}>
           <label htmlFor="authCode1">인증코드</label>
-          <div className="code-container">
+          <div className={styles.code_container}>
             <Input
               type="text"
               id="authCode1"
@@ -76,9 +76,9 @@ function EmailAuth() {
             />
           </div>
           {errors.authCode1 ? (
-            <p className="error-message">{errors.authCode1.message}</p>
+            <p className={styles.error_message}>{errors.authCode1.message}</p>
           ) : (
-            <p className="message">
+            <p className={styles.message}>
               이메일로 발송된 인증코드 6자리를 입력해주세요.
             </p>
           )}

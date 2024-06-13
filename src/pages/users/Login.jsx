@@ -50,7 +50,7 @@ function Login() {
           {errors.email && <p>{errors.email.message}</p>}
         </div>
 
-        <div className={styles.inputContainer}>
+        <div className={styles.input_container}>
           <label htmlFor="password">비밀번호</label>
           <Input
             type="password"

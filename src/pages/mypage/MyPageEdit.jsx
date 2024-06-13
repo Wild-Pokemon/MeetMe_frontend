@@ -1,7 +1,6 @@
 import Button from "@components/Button";
 import Input from "@components/Input";
-import "@styles/pages/mypage/MyPageEdit.scss";
-import { useEffect, useState } from "react";
+import styles from "@styles/pages/mypage/MyPageEdit.module.scss";
 import { useForm } from "react-hook-form";
 
 function MyPageEdit() {
@@ -11,112 +10,31 @@ function MyPageEdit() {
     formState: { errors },
     // setError,
     getValues,
-    setFocus,
-    setValue,
   } = useForm();
-
-  const [domain, setDomain] = useState("이메일 선택");
-  const [isOpen, setIsOpen] = useState(false);
-  const [isDisabled, setIsDisabled] = useState(true);
-
-  useEffect(() => {
-    if (!isDisabled) {
-      setFocus("domain");
-    }
-  }, [isDisabled, setFocus]);
-
-  const handleClick = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handleSelectDomain = (e) => {
-    const selectedDomain = e.target.value;
-    setDomain(selectedDomain);
-    if (selectedDomain === "직접 입력") {
-      setIsDisabled(false);
-      setValue("domain", "");
-      setFocus("domain");
-    } else {
-      setIsDisabled(true);
-      setValue("domain", selectedDomain);
-    }
-    setIsOpen(false);
-  };
-
-  const emailList = [
-    "naver.com",
-    "hanmail.net",
-    "kakao.com",
-    "google.com",
-    "nate.com",
-    "직접 입력",
-  ];
-
-  const options = emailList.map((item, index) => (
-    <li key={index}>
-      <button type="button" onClick={handleSelectDomain} value={item}>
-        {item}
-      </button>
-    </li>
-  ));
 
   const onSubmit = (formData) => {
     console.log(formData);
   };
 
   return (
-    <div className="mypage-edit-wrapper">
-      <div className="profile-container">
-        <img
-          className="profile-img"
-          src="/src/assets/default-profile.png"
-          alt="기본 프로필"
-        />
-        <h3 className="profile-name">홍길동</h3>
-      </div>
-
+    <div className={styles.mypage_edit_wrapper}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="input-container">
-          <label htmlFor="email">이메일</label>
-          <div className="email-container">
-            <Input
-              type="text"
-              id="email"
-              placeholder="이메일을 입력하세요."
-              error={errors.email ? true : false}
-              {...register("email", {
-                required: "이메일을 정확히 입력해 주세요.",
-              })}
-            />
-            <p>@</p>
-            <Input
-              type="text"
-              id="domain"
-              {...register("domain", {
-                required: "이메일을 정확히 입력해 주세요.",
-              })}
-              disabled={isDisabled}
-            />
-            <div className="dropdown">
-              <button
-                type="button"
-                className="select-box"
-                onClick={handleClick}
-              >
-                <span>{domain}</span>
-                <img
-                  className={isOpen ? "opened" : ""}
-                  src="/src/assets/down.svg"
-                  alt="메뉴 열기/닫기"
-                />
-              </button>
-              {isOpen && <ul className="select-options">{options}</ul>}
-            </div>
+        <div className={styles.profile_container}>
+          <img
+            className={styles.profile_img}
+            src="/src/assets/default-profile.png"
+            alt="기본 프로필"
+          />
+          <h3 className={styles.profile_name}>홍길동</h3>
+        </div>
+        <div className={styles.info_container}>
+          <div>
+            <p className={styles.info_title}>이메일</p>
+            <p className={styles.info_content}>meetme@naver.com</p>
           </div>
-          {errors.email && <p>{errors.email.message}</p>}
         </div>
 
-        <div className="input-container">
+        <div className={styles.input_container}>
           <label htmlFor="password">비밀번호</label>
           <Input
             type="text"
@@ -135,7 +53,7 @@ function MyPageEdit() {
           {errors.password && <p>{errors.password.message}</p>}
         </div>
 
-        <div className="input-container">
+        <div className={styles.input_container}>
           <label htmlFor="password-confirm">비밀번호 확인</label>
           <Input
             type="text"
@@ -156,19 +74,33 @@ function MyPageEdit() {
           {errors.password && <p>{errors.passwordConfirm.message}</p>}
         </div>
 
-        <div className="info-container">
+        <div className={styles.info_container}>
           <div>
-            <p className="info-title">생년월일</p>
-            <p className="info-content">1999년 2월 25일</p>
-          </div>
-
-          <div>
-            <p className="info-title">전화번호</p>
-            <p className="info-content">010-1234-5678</p>
+            <p className={styles.info_title}>생년월일</p>
+            <p className={styles.info_content}>1999년 2월 25일</p>
           </div>
         </div>
 
-        <div className="profile-edit-button">
+        <div className={styles.input_container}>
+          <label htmlFor="phone">전화번호</label>
+          <Input
+            type="text"
+            id="phone"
+            placeholder="휴대폰 번호를 입력하세요"
+            maxLength="11"
+            error={errors.phone ? true : false}
+            {...register("phone", {
+              required: "휴대폰 번호를 입력해 주세요.",
+              pattern: {
+                value: /^(01[016789]{1})-?[0-9]{3,4}-?[0-9]{4}$/,
+                message: "번호를 정확히 입력해 주세요.",
+              },
+            })}
+          />
+          {errors.phone && <p>{errors.phone.message}</p>}
+        </div>
+
+        <div className={styles.profile_edit_button}>
           <Button type="submit" text="프로필 수정하기" size="large" />
         </div>
       </form>

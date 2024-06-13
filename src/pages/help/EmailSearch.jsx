@@ -1,6 +1,6 @@
 import Button from "@components/Button";
 import Input from "@components/Input";
-import "@styles/pages/help/Search.scss";
+import styles from "@styles/pages/help/Search.module.scss";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
@@ -19,10 +19,10 @@ function EmailSearch() {
   };
 
   return (
-    <div className="search-wrapper">
+    <div className={styles.search_wrapper}>
       <h1>이메일 찾기</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="input-container">
+        <div className={styles.input_container}>
           <label htmlFor="name">이름</label>
           <Input
             type="text"
@@ -36,7 +36,7 @@ function EmailSearch() {
           {errors.name && <p>{errors.name.message}</p>}
         </div>
 
-        <div className="input-container">
+        <div className={styles.input_container}>
           <label htmlFor="phone">전화번호</label>
           <Input
             type="text"
