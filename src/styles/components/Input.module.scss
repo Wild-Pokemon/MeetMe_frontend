@@ -2,9 +2,9 @@
 
 input {
   width: 100%;
-  border-radius: 4px;
+  border-radius: 0.4rem;
   box-sizing: border-box;
-  border: 1px solid var(--color-gray-30);
+  border: 0.1rem solid var(--color-gray-30);
 
   overflow: hidden;
   white-space: nowrap;
@@ -20,20 +20,20 @@ input {
   }
 
   &.small {
-    height: 30px;
-    padding: 0 12px;
+    height: 3rem;
+    padding: 0 1.2rem;
     font-size: 1.2rem;
   }
 
   &.large {
-    height: 50px;
-    padding: 0 14px;
+    height: 5rem;
+    padding: 0 1.4rem;
     font-size: 1.4rem;
   }
 
   &.number {
-    height: 60px;
-    padding: 0 2px;
+    height: 6rem;
+    padding: 0 0.2rem;
     font-size: 2rem;
     text-align: center;
   }
