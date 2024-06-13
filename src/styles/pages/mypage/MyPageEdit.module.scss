@@ -34,7 +34,7 @@
       display: block;
       margin-bottom: 0.8rem;
     }
-    _ & p {
+    & p {
       @include font(1.4rem, 1.6rem, var(--font-regular));
       color: var(--color-error);
       margin-top: 0.8rem;

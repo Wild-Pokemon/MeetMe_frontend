@@ -1,4 +1,5 @@
 import Button from "@components/Button";
+import Dropdown from "@components/Dropdown";
 import Input from "@components/Input";
 import styles from "@styles/pages/users/Signup.module.scss";
 import { useEffect, useState } from "react";
@@ -15,16 +16,12 @@ function Signup() {
     setFocus,
   } = useForm();
   const [domain, setDomain] = useState("이메일 선택");
-  const [isOpen, setIsOpen] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
 
   const currentDate = new Date();
   const [year, setYear] = useState(currentDate.getFullYear());
-  const [isYearOpen, setIsYearOpen] = useState(false);
   const [month, setMonth] = useState(currentDate.getMonth() + 1);
-  const [isMonthOpen, setIsMonthOpen] = useState(false);
   const [day, setDay] = useState(currentDate.getDate());
-  const [isDayOpen, setIsDayOpen] = useState(false);
 
   useEffect(() => {
     if (!isDisabled) {
@@ -47,12 +44,7 @@ function Signup() {
   };
 
   // Dropdown 컴포넌트화 하기
-  const handleClick = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handleSelectDomain = (e) => {
-    const selectedDomain = e.target.value;
+  const handleSelectDomain = (selectedDomain) => {
     setDomain(selectedDomain);
     if (selectedDomain === "직접 입력") {
       setIsDisabled(false);
@@ -62,7 +54,6 @@ function Signup() {
       setIsDisabled(true);
       setValue("domain", selectedDomain);
     }
-    setIsOpen(false);
   };
 
   const emailList = [
@@ -74,74 +65,32 @@ function Signup() {
     "직접 입력",
   ];
 
-  const options = emailList.map((item, index) => (
-    <li key={index}>
-      <button type="button" onClick={handleSelectDomain} value={item}>
-        {item}
-      </button>
-    </li>
-  ));
-
-  const handleYearClick = () => {
-    setIsYearOpen(!isYearOpen);
-  };
-
   const yearList = Array.from(
     { length: currentDate.getFullYear() - 1900 + 1 },
     (_, i) => 1900 + i
   ).reverse();
 
-  const handleSelectYear = (e) => {
-    setYear(e.target.value);
-    setIsYearOpen(false);
-  };
-
-  const yearOptions = yearList.map((item, index) => (
-    <li key={index}>
-      <button type="button" onClick={handleSelectYear} value={item}>
-        {item}
-      </button>
-    </li>
-  ));
-
-  const handleMonthClick = () => {
-    setIsMonthOpen(!isMonthOpen);
+  const handleSelectYear = (selectedYear) => {
+    setYear(selectedYear);
   };
 
   const monthList = Array.from({ length: 12 }, (_, i) => 1 + i);
 
-  const handleSelectMonth = (e) => {
-    setMonth(e.target.value);
-    setIsMonthOpen(false);
-  };
-
-  const monthOptions = monthList.map((item, index) => (
-    <li key={index}>
-      <button type="button" onClick={handleSelectMonth} value={item}>
-        {item}
-      </button>
-    </li>
-  ));
-
-  const handleDayClick = () => {
-    setIsDayOpen(!isDayOpen);
+  const handleSelectMonth = (selectedMonth) => {
+    setMonth(selectedMonth);
   };
 
   // 월에 따라 다르게
-  const dayList = Array.from({ length: 31 }, (_, i) => 1 + i);
+  const month31 = [1, 3, 5, 7, 8, 10, 12];
+  const dayList = month31.includes(month)
+    ? Array.from({ length: 31 }, (_, i) => 1 + i)
+    : month === 2
+    ? Array.from({ length: 29 }, (_, i) => 1 + i)
+    : Array.from({ length: 30 }, (_, i) => 1 + i);
 
-  const handleSelectDay = (e) => {
-    setDay(e.target.value);
-    setIsDayOpen(false);
+  const handleSelectDay = (selectedDay) => {
+    setDay(selectedDay);
   };
-
-  const dayOptions = dayList.map((item, index) => (
-    <li key={index}>
-      <button type="button" onClick={handleSelectDay} value={item}>
-        {item}
-      </button>
-    </li>
-  ));
 
   return (
     <div className={styles.signup_wrapper}>
@@ -187,21 +136,11 @@ function Signup() {
               })}
               disabled={isDisabled}
             />
-            <div className={styles.dropdown}>
-              <button
-                type="button"
-                className={styles.select_box}
-                onClick={handleClick}
-              >
-                <span>{domain}</span>
-                <img
-                  className={isOpen ? styles.opened : ""}
-                  src="/src/assets/down.svg"
-                  alt="메뉴 열기/닫기"
-                />
-              </button>
-              {isOpen && <ul className={styles.select_options}>{options}</ul>}
-            </div>
+            <Dropdown
+              selectedValue={domain}
+              options={emailList}
+              onSelect={handleSelectDomain}
+            />
           </div>
           {(errors.email || errors.domain) && (
             <p>이메일을 정확히 입력해 주세요.</p>
@@ -271,65 +210,29 @@ function Signup() {
           <label htmlFor="phone">생년월일</label>
           <div className={styles.select_container}>
             <div className={styles.select_item}>
-              <div className={styles.dropdown}>
-                <button
-                  type="button"
-                  className={styles.select_box}
-                  onClick={handleYearClick}
-                >
-                  <span>{year}</span>
-                  <img
-                    className={isYearOpen ? styles.opened : ""}
-                    src="/src/assets/down.svg"
-                    alt="메뉴 열기/닫기"
-                  />
-                </button>
-                {isYearOpen && (
-                  <ul className={styles.select_options}>{yearOptions}</ul>
-                )}
-              </div>
+              <Dropdown
+                selectedValue={year}
+                options={yearList}
+                onSelect={handleSelectYear}
+              />
               <p>년</p>
             </div>
 
             <div className={styles.select_item}>
-              <div className={styles.dropdown}>
-                <button
-                  type="button"
-                  className={styles.select_box}
-                  onClick={handleMonthClick}
-                >
-                  <span>{month}</span>
-                  <img
-                    className={isMonthOpen ? styles.opened : ""}
-                    src="/src/assets/down.svg"
-                    alt="메뉴 열기/닫기"
-                  />
-                </button>
-                {isMonthOpen && (
-                  <ul className={styles.select_options}>{monthOptions}</ul>
-                )}
-              </div>
+              <Dropdown
+                selectedValue={month}
+                options={monthList}
+                onSelect={handleSelectMonth}
+              />
               <p>월</p>
             </div>
 
             <div className={styles.select_item}>
-              <div className={styles.dropdown}>
-                <button
-                  type="button"
-                  className={styles.select_box}
-                  onClick={handleDayClick}
-                >
-                  <span>{day}</span>
-                  <img
-                    className={isDayOpen ? styles.opened : ""}
-                    src="/src/assets/down.svg"
-                    alt="메뉴 열기/닫기"
-                  />
-                </button>
-                {isDayOpen && (
-                  <ul className={styles.select_options}>{dayOptions}</ul>
-                )}
-              </div>
+              <Dropdown
+                selectedValue={day}
+                options={dayList}
+                onSelect={handleSelectDay}
+              />
               <p>일</p>
             </div>
           </div>
