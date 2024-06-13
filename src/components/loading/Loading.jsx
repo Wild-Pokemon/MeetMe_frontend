@@ -1,3 +1,4 @@
+import styles from "@styles/components/Loading.module.scss";
 import Lottie from "lottie-react";
 import LoadingIcon from "@components/loading/loading.json";
 
@@ -11,8 +12,8 @@ function Loading() {
     },
   };
   return (
-    <div className="loading-box">
-      <div className="loading">
+    <div className={styles.loading_box}>
+      <div className={styles.loading}>
         <Lottie options={defaultOptions} height={80} width={80} />
       </div>
     </div>

@@ -1,5 +1,5 @@
-import PropTypes from "prop-types";
 import styles from "@styles/components/Modal.module.scss";
+import PropTypes from "prop-types";
 
 function Modal({ children, size = "large", text }) {
   return (
