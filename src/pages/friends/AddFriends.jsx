@@ -16,19 +16,9 @@ function AddFriends({ btnCount = 1 }) {
           <p>ywj981231@naver.com</p>
         </div>
         <div className={styles.btn}>
-          <Button
-            size={"superSmall"}
-            text={"확인"}
-            className={styles.btn}
-            color="color1"
-          />
+          <Button size={"superSmall"} text={"확인"} color="color1" />
           {btnCount === 2 && (
-            <Button
-              size="superSmall"
-              text="거절"
-              className={styles.btn}
-              color="color2"
-            />
+            <Button size="superSmall" text="거절" color="color2" />
           )}
         </div>
       </div>

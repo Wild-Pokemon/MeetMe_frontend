@@ -1,15 +1,15 @@
-import "@styles/pages/friends/Mail.scss";
+import styles from "@styles/pages/friends/Mail.module.scss";
 import AddFriends from "./AddFriends";
+import { useState } from "react";
 
 function Mail() {
+  const [mailCount, setMailCount] = useState(0);
   return (
-    <div className="container">
+    <div className={styles.container}>
       <h1>친구 요청</h1>
-      <p>n개의 새로운 메세지가 있습니다.</p>
-      <div className="wrapper">
-        <AddFriends btnCount={1} />
 
-        <p>n개의 친구 요청이 있습니다.</p>
+      <div className={styles.wrapper}>
+        <p>{mailCount}개의 친구 요청이 있습니다.</p>
         <AddFriends btnCount={2} />
       </div>
     </div>
