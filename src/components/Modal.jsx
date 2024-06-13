@@ -1,10 +1,13 @@
 import PropTypes from "prop-types";
-import "@styles/components/Modal.scss";
+import styles from "@styles/components/Modal.module.scss";
 
-function Modal({ children, size = "large" }) {
+function Modal({ children, size = "large", text }) {
   return (
-    <div className="modal-wrapper">
-      <div className={`modal-${size}`}>{children}</div>
+    <div className={styles.modal_wrapper}>
+      <div className={`${styles[`modal_${size}`]}`}>
+        {text}
+        {children}
+      </div>
     </div>
   );
 }
@@ -12,6 +15,7 @@ function Modal({ children, size = "large" }) {
 Modal.propTypes = {
   children: PropTypes.array.isRequired,
   size: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
 };
 
 export default Modal;
