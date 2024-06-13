@@ -1,87 +1,121 @@
-import "@styles/pages/promise/PromiseEdit.scss";
+import styles from "@styles/pages/promise/Promise.module.scss";
 import profile from "@assets/basic_profile.svg";
+import dropdown from "@assets/down.svg";
 import deleteIcon from "@assets/delete_icon.svg";
 import Input from "@components/Input";
 import Button from "@components/Button";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 function PromiseEdit() {
-  const { register, handleSubmit } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     values: {
       promise: "모각코",
     },
   });
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleDropClick = () => {
+    setIsOpen(!isOpen);
+  };
 
   const onSubmit = () => {};
   const handleSave = () => {};
+  const handleFriend = () => {};
 
   const handleDate = () => {};
   const handleLocation = () => {};
 
+  const categoryList = [
+    "개인",
+    "친구",
+    "데이트",
+    "공부",
+    "취미",
+    "회식",
+    "비즈니스",
+  ];
+
+  const category = categoryList.map((item, i) => <li key={i}>{item}</li>);
+
   return (
-    <div className="promise-wrapper">
+    <div className={styles.promise_wrapper}>
       <h1>약속을 변경 중이에요!</h1>
+
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="input-container">
+        <div className={styles.inputSection}>
           <label htmlFor="promise">어떤 약속인가요?</label>
-          <div className="promise-container">
+          <div className={styles.inputLayout}>
             <Input
               type="text"
               id="promise"
               placeholder="약속 이름을 정해주세요."
+              error={errors.email ? true : false}
               {...register("promise", {
                 required: "약속이름을 입력해 주세요.",
               })}
             />
-            <div className="dropdown">
-              <div className={"select"} tabIndex={0}>
+            <div className={styles.dropdown}>
+              <button
+                type="button"
+                className={styles.selectBox}
+                onClick={handleDropClick}
+              >
                 <p>-- 카테고리 --</p>
-                <img src="/src/assets/down.svg" alt="메뉴 토글" />
-              </div>
+                <img
+                  className={isOpen ? ` ${styles.opened}` : ``}
+                  src={dropdown}
+                  alt="메뉴 열기/닫기"
+                />
+              </button>
+              {isOpen && <ul className={styles.selectOptions}>{category}</ul>}
             </div>
           </div>
         </div>
 
-        <div className="input-container">
-          <div className="input-cotainer-layout">
+        <div className={styles.inputSection}>
+          <div className={styles.inputLayout}>
             <label htmlFor="friends">누구와 만날까요?</label>
-            <Button text={"친구선택"} size="small" />
+            <Button text={"친구선택"} size="small" onClick={handleFriend} />
           </div>
-          <div className="input-result">
-            <div className="input-result-info">
+
+          <div className={styles.inputResult}>
+            <div className={styles.inputResult_Item}>
               <img
-                className="input-result-src"
+                className={styles.inputResult_src}
                 src={profile}
                 alt="기본프로필이미지"
               />
-              <p className="input-result-name">홍길동</p>
-            </div>
+              <p>홍길동</p>
 
-            <button type="button">
-              <img src={deleteIcon} alt="삭제하기" />
-            </button>
+              <button type="button">
+                <img src={deleteIcon} alt="삭제하기" />
+              </button>
+            </div>
           </div>
         </div>
 
-        <div className="input-container">
-          <div className="input-cotainer-layout">
+        <div className={styles.inputSection}>
+          <div className={styles.inputLayout}>
             <label htmlFor="date">언제 만날까요?</label>
             <Button text={"일정선택"} size="small" onClick={handleDate} />
           </div>
-          <div className="input-result type-null">
-            2024년 5월 28일 오전 11:30
-          </div>
+          <div className={styles.inputResult}>2024년 5월 28일 오전 11:30</div>
         </div>
 
-        <div className="input-container">
-          <div className="input-cotainer-layout">
+        <div className={styles.inputSection}>
+          <div className={styles.inputLayout}>
             <label htmlFor="location">어디서 만날까요?</label>
             <Button text={"장소선택"} size="small" onClick={handleLocation} />
           </div>
-          <div className="input-result type-null">강남진해장</div>
+          <div className={styles.inputResult}>강남 진해장</div>
         </div>
 
-        <Button text={"약속 변경"} size="large" onClick={handleSave} />
+        <Button text={"약속변경"} size="large" onClick={handleSave} />
       </form>
     </div>
   );
