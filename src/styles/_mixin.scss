@@ -16,17 +16,17 @@
   }
 }
 
-@mixin flex-horizontal($gap: 0px) {
+@mixin flex-horizontal($gap: 0rem) {
   display: flex;
   gap: $gap;
 }
 
-@mixin flex-vertical($gap: 0px) {
+@mixin flex-vertical($gap: 0rem) {
   @include flex-horizontal($gap);
   flex-direction: column;
 }
 
-@mixin center-xy($gap: 0px) {
+@mixin center-xy($gap: 0rem) {
   display: flex;
   justify-content: center;
   align-items: center;

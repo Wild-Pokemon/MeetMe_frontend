@@ -1,3 +1,10 @@
+/* Typography */
+:root {
+  font-family: var(--font-pretendard);
+  font-size: 10px;
+  letter-spacing: -3%;
+}
+
 /* Custom */
 a {
   color: unset;
