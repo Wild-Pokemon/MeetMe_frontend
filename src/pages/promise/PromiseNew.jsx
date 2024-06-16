@@ -5,6 +5,7 @@ import Button from "@components/Button";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import PromiseFriendModal from "@pages/promise/PromiseFriendModal";
+import PromiseLocationModal from "@pages/promise/PromiseLocationModal";
 
 function PromiseNew() {
   const {
@@ -15,6 +16,7 @@ function PromiseNew() {
 
   const [friend, setFriend] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [location, setLocation] = useState(false);
 
   const handleDropClick = () => {
     setIsOpen(!isOpen);
@@ -26,7 +28,12 @@ function PromiseNew() {
     return;
   };
   const handleDate = () => {};
-  const handleLocation = () => {};
+
+  // 지도 설정 모달 오픈
+  const handleLocation = () => {
+    setLocation(!location);
+    return;
+  };
 
   const categoryList = [
     "개인",
@@ -98,6 +105,12 @@ function PromiseNew() {
             <label htmlFor="location">어디서 만날까요?</label>
             <Button text={"장소선택"} size="small" onClick={handleLocation} />
           </div>
+
+          {location ? (
+            <PromiseLocationModal handleLocation={handleLocation} />
+          ) : (
+            ""
+          )}
           <div className={styles.inputResult}>장소를 선택해주세요.</div>
         </div>
 
