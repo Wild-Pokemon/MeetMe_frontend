@@ -2,52 +2,60 @@
 
 .error_wrapper {
   display: flex;
-  align-items: center;
+  height: 100vh;
   padding: 5rem 2.4rem;
   box-sizing: border-box;
-  gap: 5rem;
-  transition: all 0.5s;
 
-  .errorText {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    color: var(--color-secondary);
-    margin: auto;
-    & h1 {
-      font-size: 6rem;
-      font-weight: 900;
-    }
-
-    & p {
-      font-size: 3rem;
-      font-weight: var(--font-semibold);
-    }
-  }
-  & img {
-    width: 50rem;
-  }
-
-  @include tablet {
+  .error_contents {
     width: 100%;
-    margin: auto;
-    max-width: 90rem;
-  }
-
-  @include mobile {
-    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    gap: 10rem;
+    transition: all 0.3s;
 
     .errorText {
-      gap: 1rem;
-      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2rem;
+      color: var(--color-secondary);
+
       & h1 {
-        font-size: 5rem;
+        font-size: 6rem;
         font-weight: 900;
       }
 
       & p {
-        font-size: 2rem;
+        font-size: 3rem;
         font-weight: var(--font-semibold);
+      }
+    }
+    & img {
+      width: 50rem;
+    }
+  }
+  @include tablet {
+    max-width: 90rem;
+    width: 100%;
+    margin: auto;
+  }
+
+  @include mobile {
+    .error_contents {
+      flex-direction: column;
+
+      .errorText {
+        gap: 1rem;
+        text-align: center;
+        & h1 {
+          font-size: 5rem;
+          font-weight: 900;
+        }
+
+        & p {
+          font-size: 2rem;
+          font-weight: var(--font-semibold);
+        }
       }
     }
   }
