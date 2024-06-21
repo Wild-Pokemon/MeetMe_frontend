@@ -1,13 +1,11 @@
-import Header from "@components/layout/Header";
 import "@styles/components/layout/Layout.scss";
-import { useState } from "react";
+import Header from "@components/layout/Header";
 import { Outlet } from "react-router-dom";
 
 function Layout() {
-  const [user, setUser] = useState(false);
   return (
     <div className="layout">
-      {user ? <Header /> : ""}
+      <Header />
       <Outlet />
     </div>
   );
