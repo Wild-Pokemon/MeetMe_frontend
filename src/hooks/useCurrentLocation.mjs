@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 
-function useLocation() {
+function useCurrentLocation() {
   const [location, setLocation] = useState("");
 
   useMemo(() => {
@@ -17,8 +17,8 @@ function useLocation() {
 
     function error() {
       setLocation({
-        latitude: 33.450701,
-        longitude: 126.570667,
+        latitude: 37.56717999967529,
+        longitude: 126.97812581864544,
       });
     }
   }, [navigator.geolocation.getCurrentPosition]);
@@ -26,4 +26,4 @@ function useLocation() {
   return location;
 }
 
-export default useLocation;
+export default useCurrentLocation;
