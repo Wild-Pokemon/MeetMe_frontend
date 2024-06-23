@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import PromiseFriendModal from "@pages/promise/PromiseFriendModal";
 import PromiseLocationModal from "@pages/promise/PromiseLocationModal";
+import Dropdown from "@components/Dropdown";
 
 function PromiseNew() {
   const {
@@ -15,12 +16,13 @@ function PromiseNew() {
   } = useForm();
 
   const [friend, setFriend] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [category, setCategory] = useState("카테고리");
   const [location, setLocation] = useState(false);
 
-  const handleDropClick = () => {
-    setIsOpen(!isOpen);
+  const handleDropClick = (selectedDomain) => {
+    setCategory(selectedDomain);
   };
+
   const onSubmit = () => {};
   const handleSave = () => {};
   const handleFriend = () => {
@@ -45,8 +47,6 @@ function PromiseNew() {
     "비즈니스",
   ];
 
-  const category = categoryList.map((item, i) => <li key={i}>{item}</li>);
-
   return (
     <div className={styles.promise_wrapper}>
       <h1>약속을 잡고 있어요!</h1>
@@ -64,21 +64,11 @@ function PromiseNew() {
                 required: "약속이름을 입력해 주세요.",
               })}
             />
-            <div className={styles.dropdown}>
-              <button
-                type="button"
-                className={styles.selectBox}
-                onClick={handleDropClick}
-              >
-                <p>-- 카테고리 --</p>
-                <img
-                  className={isOpen ? ` ${styles.opened}` : ``}
-                  src={dropdown}
-                  alt="메뉴 열기/닫기"
-                />
-              </button>
-              {isOpen && <ul className={styles.selectOptions}>{category}</ul>}
-            </div>
+            <Dropdown
+              selectedValue={category}
+              options={categoryList}
+              onSelect={handleDropClick}
+            />
           </div>
         </div>
 

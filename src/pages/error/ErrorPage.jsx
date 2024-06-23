@@ -1,4 +1,4 @@
-import styles from "@styles/ErrorPage.module.scss";
+import styles from "@styles/pages/error/ErrorPage.module.scss";
 import errorIcon from "@assets/error_icon.svg";
 
 function ErrorPage() {
