@@ -1,0 +1,63 @@
+@import "@styles/mixin";
+
+.contentsItem {
+  min-width: 32rem;
+  border: 0.1rem solid var(--color-primary);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-sizing: border-box;
+  @include flex-vertical(2.5rem);
+  align-items: flex-start;
+
+  .date {
+    min-width: 4rem;
+    text-align: center;
+    padding: 0.4rem 0.6rem;
+    box-sizing: border-box;
+    color: var(--color-white);
+    border-radius: 0.5rem;
+    background-color: var(--color-primary);
+  }
+  .date.typeOrange {
+    background-color: var(--color-secondary);
+  }
+
+  .date.typeGray {
+    background-color: var(--color-gray-30);
+  }
+
+  .title {
+    @include font(2.3rem, 2.3rem, 600);
+  }
+
+  & ul {
+    @include flex-vertical(1.6rem);
+
+    & li {
+      @include flex-horizontal(1rem);
+      align-items: center;
+
+      .infoTit {
+        @include font(1.5rem, 1.5rem, 0);
+        color: var(--color-gray-50);
+      }
+
+      .infoContent {
+        @include font(1.3rem, 1.3rem, 500);
+        @include flex-horizontal(1.6rem);
+        align-items: center;
+      }
+      .imgBox {
+        & img {
+          width: 2.4rem;
+          height: 2.4rem;
+          margin-left: -0.6rem;
+        }
+      }
+    }
+  }
+}
+
+.contentsItem.typeGray {
+  border-color: var(--color-gray-30);
+}

@@ -6,6 +6,7 @@ import Input from "@components/Input";
 import Button from "@components/Button";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import Dropdown from "@components/Dropdown";
 
 function PromiseEdit() {
   const {
@@ -17,10 +18,10 @@ function PromiseEdit() {
       promise: "모각코",
     },
   });
-  const [isOpen, setIsOpen] = useState(false);
+  const [category, setCategory] = useState("카테고리");
 
-  const handleDropClick = () => {
-    setIsOpen(!isOpen);
+  const handleDropClick = (selectedDomain) => {
+    setCategory(selectedDomain);
   };
 
   const onSubmit = () => {};
@@ -40,8 +41,6 @@ function PromiseEdit() {
     "비즈니스",
   ];
 
-  const category = categoryList.map((item, i) => <li key={i}>{item}</li>);
-
   return (
     <div className={styles.promise_wrapper}>
       <h1>약속을 변경 중이에요!</h1>
@@ -59,21 +58,11 @@ function PromiseEdit() {
                 required: "약속이름을 입력해 주세요.",
               })}
             />
-            <div className={styles.dropdown}>
-              <button
-                type="button"
-                className={styles.selectBox}
-                onClick={handleDropClick}
-              >
-                <p>-- 카테고리 --</p>
-                <img
-                  className={isOpen ? ` ${styles.opened}` : ``}
-                  src={dropdown}
-                  alt="메뉴 열기/닫기"
-                />
-              </button>
-              {isOpen && <ul className={styles.selectOptions}>{category}</ul>}
-            </div>
+            <Dropdown
+              selectedValue={category}
+              options={categoryList}
+              onSelect={handleDropClick}
+            />
           </div>
         </div>
 
