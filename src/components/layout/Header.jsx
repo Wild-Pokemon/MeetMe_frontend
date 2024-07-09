@@ -8,9 +8,11 @@ import myPageIcon from "@assets/myPage.svg";
 import friendsIcon from "@assets/friends.svg";
 import scheduleIcon from "@assets/schedule.svg";
 import Button from "@components/Button";
+import useUserStore from "@zustand/user.mjs";
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, setUser } = useUserStore();
 
   const handleMenuToggle = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -18,6 +20,10 @@ function Header() {
 
   const closeMenu = () => {
     setIsMenuOpen(false);
+  };
+
+  const handleLogout = () => {
+    setUser(null);
   };
 
   return (
@@ -59,13 +65,16 @@ function Header() {
             스케줄관리
           </Link>
         </div>
-        <div onClick={closeMenu}>
-          <Button
-            text={"로그아웃"}
-            size={"extraSmall"}
-            className={styles.btn}
-          ></Button>
-        </div>
+        {user && (
+          <div onClick={closeMenu}>
+            <Button
+              text={"로그아웃"}
+              size={"extraSmall"}
+              className={styles.btn}
+              onClick={handleLogout}
+            ></Button>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -6,13 +6,13 @@ import logoTextSrc from "@assets/meetme_logo_text.svg";
 import mainImg from "@assets/mainpage_image.svg";
 import floatingIcon from "@assets/promise_new.svg";
 import Button from "@components/Button";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MainPageItem from "./MainPageItem";
+import useUserStore from "@zustand/user.mjs";
 
 function MainPage() {
   const navigate = useNavigate();
-  const [user, setUser] = useState(true);
+  const { user } = useUserStore();
 
   const handleLogin = () => {
     navigate("/users/login");
