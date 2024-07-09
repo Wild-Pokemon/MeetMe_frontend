@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 
 const { kakao } = window;
 
-function PromiseLocationModal({ handleLocation }) {
+function PromiseCenterLocationModal({ handleLocation }) {
   const [state, setState] = useState({
     center: {
       lat: 37.5666,
@@ -276,8 +276,8 @@ function PromiseLocationModal({ handleLocation }) {
   );
 }
 
-PromiseLocationModal.propTypes = {
+PromiseCenterLocationModal.propTypes = {
   handleLocation: PropTypes.func.isRequired,
 };
 
-export default PromiseLocationModal;
+export default PromiseCenterLocationModal;

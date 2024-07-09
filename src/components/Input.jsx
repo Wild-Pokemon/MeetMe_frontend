@@ -25,7 +25,7 @@ Input.displayName = "Input";
 Input.propTypes = {
   size: PropTypes.string,
   type: PropTypes.string,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
   placeholder: PropTypes.string,
   error: PropTypes.bool,
 };

@@ -7,6 +7,7 @@ import { useState } from "react";
 import PromiseFriendModal from "@pages/promise/PromiseFriendModal";
 import PromiseLocationModal from "@pages/promise/PromiseLocationModal";
 import Dropdown from "@components/Dropdown";
+import PromiseCenterLocationModal from "@pages/promise/PromiseCenterLocationModal";
 
 function PromiseNew() {
   const {
@@ -95,12 +96,16 @@ function PromiseNew() {
             <label htmlFor="location">어디서 만날까요?</label>
             <Button text={"장소선택"} size="small" onClick={handleLocation} />
           </div>
-
           {location ? (
-            <PromiseLocationModal handleLocation={handleLocation} />
+            <PromiseCenterLocationModal handleLocation={handleLocation} />
           ) : (
             ""
           )}
+          {/* {location ? (
+            <PromiseLocationModal handleLocation={handleLocation} />
+          ) : (
+            ""
+          )} */}
           <div className={styles.inputResult}>장소를 선택해주세요.</div>
         </div>
 
