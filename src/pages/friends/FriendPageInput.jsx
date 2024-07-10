@@ -2,7 +2,11 @@ import search from "@assets/search.svg";
 import styles from "@styles/pages/friends/FriendPageInput.module.scss";
 
 // eslint-disable-next-line react/prop-types
-function FriendPageInput({ placeholder }) {
+function FriendPageInput({ placeholder, setInputElement }) {
+  const handleInputElementChange = (e) => {
+    setInputElement(e.target.value);
+  };
+
   return (
     <div className={styles.searchContainer}>
       <input
@@ -10,6 +14,7 @@ function FriendPageInput({ placeholder }) {
         className={styles.inputContent}
         id="search"
         placeholder={placeholder}
+        onChange={handleInputElementChange}
       />
       <img src={search} alt="검색 아이콘" className={styles.searchIcon} />
     </div>

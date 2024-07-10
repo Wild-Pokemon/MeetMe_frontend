@@ -11,13 +11,17 @@
 }
 
 .ModalContent {
+  overflow-y: scroll;
+  margin-bottom: 3rem;
+  margin-top: 3rem;
   background: white;
   width: 100vw;
   border-radius: 5px;
   position: relative;
+  padding: 0 2.4rem;
 
   .ModalText {
-    text-align: center;
+    margin-top: 3rem;
     font-size: 1.3rem;
   }
 }
