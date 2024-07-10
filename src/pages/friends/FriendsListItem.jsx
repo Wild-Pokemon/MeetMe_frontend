@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useLocation } from "react-router-dom";
 import basic_profile from "@assets/basic_profile.svg";
 import trashcan from "@assets/trashcan.svg";
@@ -7,7 +8,8 @@ import useEditStore from "@zustand/edit.mjs";
 import FriendModal from "./FriendModal";
 import { useState } from "react";
 
-function FriendsListItem() {
+// eslint-disable-next-line react/prop-types
+function FriendsListItem({ friend }) {
   const location = useLocation();
   const isFriendRequestPage = location.pathname === "/friends/request";
   const { isEditMode } = useEditStore();
@@ -24,8 +26,8 @@ function FriendsListItem() {
           className={styles.ProfileimgSize}
         ></img>
         <div>
-          <p className={styles.UserName}>윤우중</p>
-          <p className={styles.UserEmail}>ywj98121@naver.com</p>
+          <p className={styles.UserName}>{friend?.name}</p>
+          <p className={styles.UserEmail}>{friend?.email}</p>
         </div>
       </div>
 
