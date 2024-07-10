@@ -1,0 +1,15 @@
+meta {
+  name: 유저 목록 검색
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{url}}/users/list?search
+  body: none
+  auth: none
+}
+
+query {
+  search: 
+}

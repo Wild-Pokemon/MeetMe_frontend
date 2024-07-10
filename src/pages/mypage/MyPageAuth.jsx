@@ -2,17 +2,31 @@ import Input from "@components/Input";
 import { useForm } from "react-hook-form";
 import styles from "@styles/pages/mypage/MyPageAuth.module.scss";
 import Button from "@components/Button";
+import useCustomAxios from "@hooks/useCustomAxios.mjs";
+import { useNavigate } from "react-router-dom";
 
 function MyPageAuth() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    // setError,
   } = useForm();
+  const axios = useCustomAxios();
+  const navigate = useNavigate();
 
-  const onSubmit = (formData) => {
-    console.log(formData);
+  const onSubmit = async (formData) => {
+    try {
+      const res = await axios.post("/auth/password", formData);
+      console.log(res.data.code);
+
+      if (res.data.code === 200) {
+        navigate("/mypage/edit");
+      } else {
+        throw new Error(res.data.message);
+      }
+    } catch (e) {
+      alert(e.message);
+    }
   };
 
   return (

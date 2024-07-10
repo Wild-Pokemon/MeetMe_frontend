@@ -1,7 +1,10 @@
 import Button from "@components/Button";
 import Input from "@components/Input";
+import useCustomAxios from "@hooks/useCustomAxios.mjs";
 import styles from "@styles/pages/mypage/MyPageEdit.module.scss";
+import useUserStore from "@zustand/user.mjs";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 function MyPageEdit() {
   const {
@@ -11,9 +14,39 @@ function MyPageEdit() {
     // setError,
     getValues,
   } = useForm();
+  const axios = useCustomAxios();
+  const navigate = useNavigate();
+  const { user, setUser } = useUserStore();
 
-  const onSubmit = (formData) => {
+  const onSubmit = async (formData) => {
+    formData.email = user.email;
+
+    if (!formData.password) {
+      delete formData.password;
+    }
+    delete formData.passwordConfirm;
+
+    if (!formData.phone) {
+      formData.phone = user.phone;
+    }
+
     console.log(formData);
+
+    try {
+      const res = await axios.put("/auth/profile", formData);
+
+      if (res.data.code) {
+        setUser({
+          ...user,
+          phone: formData.phone,
+        });
+        navigate("/mypage");
+      } else {
+        throw new Error(res.data.message);
+      }
+    } catch (e) {
+      alert(e.message);
+    }
   };
 
   return (
@@ -25,27 +58,26 @@ function MyPageEdit() {
             src="/src/assets/default-profile.png"
             alt="기본 프로필"
           />
-          <h3 className={styles.profile_name}>홍길동</h3>
+          <h3 className={styles.profile_name}>{user.name}</h3>
         </div>
         <div className={styles.info_container}>
           <div>
             <p className={styles.info_title}>이메일</p>
-            <p className={styles.info_content}>meetme@naver.com</p>
+            <p className={styles.info_content}>{user.email}</p>
           </div>
         </div>
 
         <div className={styles.input_container}>
           <label htmlFor="password">비밀번호</label>
           <Input
-            type="text"
+            type="password"
             id="password"
             placeholder="변경하실 비밀번호를 입력하세요."
             error={errors.password ? true : false}
             {...register("password", {
-              required: "변경하실 비밀번호를 입력해 주세요.",
               pattern: {
                 value:
-                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                  /^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
                 message: "비밀번호 형식에 맞게 입력해 주세요.",
               },
             })}
@@ -56,12 +88,11 @@ function MyPageEdit() {
         <div className={styles.input_container}>
           <label htmlFor="password-confirm">비밀번호 확인</label>
           <Input
-            type="text"
+            type="password"
             id="password-confirm"
             placeholder="비밀번호를 한 번 더 입력하세요."
             error={errors.passwordConfirm ? true : false}
             {...register("passwordConfirm", {
-              required: "비밀번호를 한 번 더 입력해 주세요.",
               validate: {
                 check: (val) => {
                   if (getValues("password") !== val) {
@@ -77,7 +108,7 @@ function MyPageEdit() {
         <div className={styles.info_container}>
           <div>
             <p className={styles.info_title}>생년월일</p>
-            <p className={styles.info_content}>1999년 2월 25일</p>
+            <p className={styles.info_content}>{user.birth}</p>
           </div>
         </div>
 
@@ -90,7 +121,6 @@ function MyPageEdit() {
             maxLength="11"
             error={errors.phone ? true : false}
             {...register("phone", {
-              required: "휴대폰 번호를 입력해 주세요.",
               pattern: {
                 value: /^(01[016789]{1})-?[0-9]{3,4}-?[0-9]{4}$/,
                 message: "번호를 정확히 입력해 주세요.",

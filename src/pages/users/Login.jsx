@@ -22,15 +22,14 @@ function Login() {
     // setError,
   } = useForm({
     values: {
-      email: "meetme@naver.com",
+      email: "km@naver.com",
       password: "asdf1234!@",
     },
   });
 
   const onSubmit = async (formData) => {
+    setIsLoading(true);
     try {
-      setIsLoading(true);
-
       const res = await axios.post("/auth/login", formData);
       console.log(res.data.data);
 
@@ -40,10 +39,11 @@ function Login() {
         },
       });
 
-      console.log(userResponse.data.data);
       setUser({
         name: userResponse.data.data.name,
         email: userResponse.data.data.email,
+        birth: userResponse.data.data.birth,
+        phone: userResponse.data.data.phone,
         token: res.data.data,
       });
 
