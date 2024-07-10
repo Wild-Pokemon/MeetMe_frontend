@@ -1,0 +1,62 @@
+@import "@styles/mixin";
+
+.error_wrapper {
+  display: flex;
+  height: 100vh;
+  padding: 5rem 2.4rem;
+  box-sizing: border-box;
+
+  .error_contents {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10rem;
+    transition: all 0.3s;
+
+    .errorText {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2rem;
+      color: var(--color-secondary);
+
+      & h1 {
+        font-size: 6rem;
+        font-weight: 900;
+      }
+
+      & p {
+        font-size: 3rem;
+        font-weight: var(--font-semibold);
+      }
+    }
+    & img {
+      width: 50rem;
+    }
+  }
+  @include tablet {
+    max-width: 90rem;
+    width: 100%;
+    margin: auto;
+  }
+
+  @include mobile {
+    .error_contents {
+      flex-direction: column;
+
+      .errorText {
+        gap: 1rem;
+        text-align: center;
+        & h1 {
+          font-size: 5rem;
+          font-weight: 900;
+        }
+
+        & p {
+          font-size: 2rem;
+          font-weight: var(--font-semibold);
+        }
+      }
+    }
+  }
+}

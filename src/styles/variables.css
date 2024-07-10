@@ -1,0 +1,31 @@
+:root {
+  /* typography */
+  --font-pretendard: "Pretendard", sans-serif;
+
+  --font-extralight: 200;
+  --font-light: 300;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+
+  /* colors */
+  --color-primary: #a4dcf9;
+  --color-primary-rgb: 164, 220, 249;
+  --color-secondary: #f2994a;
+
+  --color-warning: #e2b93b;
+  --color-error: #eb5757;
+
+  --color-blue: #0303c2;
+
+  --color-black: #000000;
+
+  --color-gray-10: #e0e0e0;
+  --color-gray-30: #bdbdbd;
+  --color-gray-50: #828282;
+  --color-gray-70: #4f4f4f;
+  --color-gray-90: #333333;
+
+  --color-white: #ffffff;
+}

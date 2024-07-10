@@ -1,0 +1,28 @@
+.searchContainer {
+  position: relative;
+  width: 100%;
+  margin-top: 30px;
+
+  .inputContent {
+    width: 100%;
+    padding: 17px 14px;
+    box-sizing: border-box;
+    border: 1px solid #bdbdbd;
+    border-radius: 4px;
+  }
+
+  .searchIcon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
+  }
+}
+.buttonContainer {
+}
+.friend-container {
+  margin-top: 4rem;
+}

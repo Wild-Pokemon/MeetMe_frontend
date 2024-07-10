@@ -1,1 +1,26 @@
-/* CSS Reset */
+/* Typography */
+:root {
+  font-family: var(--font-pretendard);
+  font-size: 10px;
+  letter-spacing: -3%;
+}
+
+/* Custom */
+a {
+  color: unset;
+  text-decoration: none;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+}
+
+input {
+  all: unset;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: top;
+}

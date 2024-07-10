@@ -1,0 +1,62 @@
+@import "@styles/mixin";
+
+.search_result_wrapper {
+  flex-grow: 1;
+  padding: 0 2.4rem;
+  box-sizing: border-box;
+  transition: all 0.3s;
+
+  h1 {
+    @include font(2.4rem, 1.2, var(--font-semibold));
+    margin-top: 5rem;
+    text-align: center;
+  }
+
+  .search_result_container {
+    margin: 5rem 0;
+    width: 100%;
+    padding: 3rem;
+    box-sizing: border-box;
+    background-color: rgba(var(--color-primary-rgb), 0.2);
+    border-radius: 1.6rem;
+    box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    .search_result_name {
+      @include font(1.6rem, 2rem, var(--font-regular));
+      color: var(--color-gray-50);
+      margin-bottom: 2rem;
+
+      & span {
+        color: var(--color-black);
+        font-weight: var(--font-semibold);
+      }
+    }
+
+    .search_result_content {
+      @include font(1.8rem, 1.2, var(--font-regular));
+      color: var(--color-gray-50);
+
+      & span {
+        color: var(--color-black);
+        font-weight: var(--font-semibold);
+      }
+    }
+  }
+
+  @include tablet {
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: unset;
+
+    h1 {
+      margin-top: 8rem;
+    }
+
+    .search_result_container {
+      margin: 8rem 0;
+    }
+  }
+}
