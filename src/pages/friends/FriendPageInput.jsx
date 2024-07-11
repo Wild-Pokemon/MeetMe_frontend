@@ -2,9 +2,9 @@ import search from "@assets/search.svg";
 import styles from "@styles/pages/friends/FriendPageInput.module.scss";
 
 // eslint-disable-next-line react/prop-types
-function FriendPageInput({ placeholder, setInputElement }) {
+function FriendPageInput({ placeholder, setSearchTerm }) {
   const handleInputElementChange = (e) => {
-    setInputElement(e.target.value);
+    setSearchTerm(e.target.value);
   };
 
   return (

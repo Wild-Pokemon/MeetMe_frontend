@@ -13,7 +13,7 @@ function FriendMainPage() {
   const token = user.token.accessToken;
 
   useEffect(() => {
-    // 현재 나와 친구 인 사람 불러오기이
+    // 현재 나와 친구 인 사람 불러오기
     const getFriendsList = async () => {
       try {
         const res = await axios.get("/friends?pageNo=1", {
