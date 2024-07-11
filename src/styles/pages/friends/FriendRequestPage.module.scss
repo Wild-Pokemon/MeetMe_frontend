@@ -7,3 +7,34 @@
   color: var(--color-gray-50);
   margin-bottom: 3rem;
 }
+
+.ListItemLayout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+
+  margin-bottom: 2rem;
+
+  .ListProfile {
+    display: flex;
+    gap: 2rem;
+
+    .ProfileimgSize {
+      width: 4rem;
+      height: 4rem;
+      border: 1px solid #ddd;
+      border-radius: 10rem;
+    }
+
+    .UserName {
+      font-size: 1.6rem;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+    }
+    .UserEmail {
+      font-size: 1.2rem;
+      color: var(--color-gray-50);
+    }
+  }
+}

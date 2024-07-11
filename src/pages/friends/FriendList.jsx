@@ -6,7 +6,7 @@ import useEditStore from "@zustand/edit.mjs";
 /* eslint-disable */
 function FriendList({ friendData }) {
   const { isEditMode, setIsEditMode } = useEditStore();
-  console.log(isEditMode);
+  console.log("수정모드인가?", isEditMode);
 
   const list = friendData?.data?.friendList?.map((item) => {
     return <FriendsListItem key={item.userId} friend={item} />;
