@@ -3,6 +3,7 @@ import Input from "@components/Input";
 import useCustomAxios from "@hooks/useCustomAxios.mjs";
 import styles from "@styles/pages/mypage/MyPageEdit.module.scss";
 import useUserStore from "@zustand/user.mjs";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
@@ -11,12 +12,12 @@ function MyPageEdit() {
     register,
     handleSubmit,
     formState: { errors },
-    // setError,
     getValues,
   } = useForm();
   const axios = useCustomAxios();
   const navigate = useNavigate();
   const { user, setUser } = useUserStore();
+  const [isActive, setIsActive] = useState(false);
 
   const onSubmit = async (formData) => {
     formData.email = user.email;
@@ -29,8 +30,6 @@ function MyPageEdit() {
     if (!formData.phone) {
       formData.phone = user.phone;
     }
-
-    console.log(formData);
 
     try {
       const res = await axios.put("/auth/profile", formData);
@@ -45,7 +44,7 @@ function MyPageEdit() {
         throw new Error(res.data.message);
       }
     } catch (e) {
-      alert(e.message);
+      console.log(e);
     }
   };
 
@@ -66,44 +65,60 @@ function MyPageEdit() {
             <p className={styles.info_content}>{user.email}</p>
           </div>
         </div>
-
-        <div className={styles.input_container}>
-          <label htmlFor="password">비밀번호</label>
-          <Input
-            type="password"
-            id="password"
-            placeholder="변경하실 비밀번호를 입력하세요."
-            error={errors.password ? true : false}
-            {...register("password", {
-              pattern: {
-                value:
-                  /^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-                message: "비밀번호 형식에 맞게 입력해 주세요.",
-              },
-            })}
+        <div className={styles.password_option}>
+          <p>비밀번호 변경</p>
+          <input
+            className={styles.checkbox}
+            id="toggle"
+            type="checkbox"
+            value={isActive}
+            onChange={() => setIsActive(!isActive)}
           />
-          {errors.password && <p>{errors.password.message}</p>}
+          <label htmlFor="toggle"></label>
         </div>
+        {isActive && (
+          <>
+            <div className={styles.input_container}>
+              <label htmlFor="password">비밀번호</label>
+              <Input
+                type="password"
+                id="password"
+                placeholder="변경하실 비밀번호를 입력하세요."
+                error={errors.password ? true : false}
+                {...register("password", {
+                  required: "변경하실 비밀번호를 입력하세요.",
+                  pattern: {
+                    value:
+                      /^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                    message: "비밀번호 형식에 맞게 입력해 주세요.",
+                  },
+                })}
+              />
+              {errors.password && <p>{errors.password.message}</p>}
+            </div>
 
-        <div className={styles.input_container}>
-          <label htmlFor="password-confirm">비밀번호 확인</label>
-          <Input
-            type="password"
-            id="password-confirm"
-            placeholder="비밀번호를 한 번 더 입력하세요."
-            error={errors.passwordConfirm ? true : false}
-            {...register("passwordConfirm", {
-              validate: {
-                check: (val) => {
-                  if (getValues("password") !== val) {
-                    return "입력하신 비밀번호가 일치하지 않습니다.";
-                  }
-                },
-              },
-            })}
-          />
-          {errors.password && <p>{errors.passwordConfirm.message}</p>}
-        </div>
+            <div className={styles.input_container}>
+              <label htmlFor="password-confirm">비밀번호 확인</label>
+              <Input
+                type="password"
+                id="password-confirm"
+                placeholder="비밀번호를 한 번 더 입력하세요."
+                error={errors.passwordConfirm ? true : false}
+                {...register("passwordConfirm", {
+                  required: "비밀번호를 한 번 더 입력하세요.",
+                  validate: {
+                    check: (val) => {
+                      if (getValues("password") !== val) {
+                        return "입력하신 비밀번호가 일치하지 않습니다.";
+                      }
+                    },
+                  },
+                })}
+              />
+              {errors.password && <p>{errors.passwordConfirm.message}</p>}
+            </div>
+          </>
+        )}
 
         <div className={styles.info_container}>
           <div>

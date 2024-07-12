@@ -1,6 +1,7 @@
 @import "@styles/mixin";
 
-input {
+input[type="text"],
+input[type="password"] {
   width: 100%;
   border-radius: 0.4rem;
   box-sizing: border-box;

@@ -17,7 +17,6 @@ function MyPageAuth() {
   const onSubmit = async (formData) => {
     try {
       const res = await axios.post("/auth/password", formData);
-      console.log(res.data.code);
 
       if (res.data.code === 200) {
         navigate("/mypage/edit");
