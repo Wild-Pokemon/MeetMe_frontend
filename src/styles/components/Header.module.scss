@@ -1,30 +1,104 @@
-.header_container {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  font-size: 1.4rem;
-  font-weight: 300;
-}
-
-.header_wrapper {
-  padding: 0 2.4rem;
-  display: flex;
-  justify-content: center;
-}
-
-.header_items {
-  display: flex;
-  align-items: center;
-  max-width: 1200px;
+.header {
   width: 100%;
+  border-bottom: 0.1rem solid #bdbdbd;
+  padding: 1.5rem 2.5rem 1.5rem 1.5rem;
+  box-sizing: border-box;
+  font-size: 2rem;
+  text-decoration: none;
+
+  a {
+    text-decoration: none;
+    color: var(--color-black);
+    transition: color 0.3s ease, transform 0.3s ease;
+
+    &:hover {
+      color: var(--color-primary);
+      transform: scale(1.05);
+    }
+  }
+
+  &.headerexpanded {
+    box-shadow: 0px 0.4rem 0.4rem rgba(0, 0, 0, 0.2);
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+  }
+
+  .btn {
+    position: relative;
+    left: 25rem;
+  }
+  &_wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    .header_logo {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .header_menu {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      .menu_button {
+        background: none;
+        border: none;
+        font-size: 1.6rem;
+        cursor: pointer;
+        img {
+          width: 2.4rem;
+          height: 2.4rem;
+        }
+      }
+    }
+  }
+
+  .menu_items {
+    display: none;
+    flex-direction: column;
+    align-items: start;
+    gap: 2rem;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    &.menu_itemsopen {
+      display: flex; // 메뉴가 열릴 때 보임
+    }
+
+    .menu_item {
+      text-align: center;
+      text-decoration: none;
+
+      img {
+        width: 2.4rem;
+        height: 2.4rem;
+        margin-right: 2.4rem;
+      }
+    }
+  }
 }
-.eachItem {
-  display: flex;
-  align-items: center;
-  margin-left: auto;
-  gap: 1rem;
-}
-.leftside {
-  display: flex;
-  margin-left: auto;
-  gap: 3rem;
+
+@media (min-width: 640px) {
+  .header {
+    .header_menu {
+      display: none;
+    }
+
+    .menu_items {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+    &_wrapper {
+      width: 10%;
+    }
+
+    .btn {
+      position: relative;
+      left: 55rem;
+    }
+  }
 }
