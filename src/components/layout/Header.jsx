@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import styles from "@styles/components/Header.module.scss";
 import meetmeLogo from "@assets/meetme_logo_symbol.svg";
@@ -13,7 +13,6 @@ import useUserStore from "@zustand/user.mjs";
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, setUser } = useUserStore();
-  const navigate = useNavigate();
 
   const handleMenuToggle = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -25,7 +24,6 @@ function Header() {
 
   const handleLogout = () => {
     setUser(null);
-    navigate("/users/login");
   };
 
   return (

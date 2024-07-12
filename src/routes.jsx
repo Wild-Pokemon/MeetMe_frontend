@@ -5,7 +5,8 @@ import Calendar from "@pages/calendar/Calendar";
 import PromiseDetail from "@pages/promise/PromiseDetail";
 import PromiseEdit from "@pages/promise/PromiseEdit";
 import PromiseNew from "@pages/promise/PromiseNew";
-
+import Mail from "@pages/friends/Mail";
+import FriendListPage from "@pages/friends/FriendListPage";
 import EmailAuth from "@pages/help/EmailAuth";
 import EmailSearch from "@pages/help/EmailSearch";
 import EmailSearchResult from "@pages/help/EmailSearchResult";
@@ -18,8 +19,6 @@ import MyPageMain from "@pages/mypage/MyPageMain";
 import Login from "@pages/users/Login";
 import Signup from "@pages/users/Signup";
 import { Navigate, createBrowserRouter } from "react-router-dom";
-import FriendMainPage from "@pages/friends/FriendMainPage";
-import FriendRequestPage from "@pages/friends/FriendRequestPage";
 
 const router = createBrowserRouter([
   {
@@ -83,11 +82,11 @@ const router = createBrowserRouter([
       },
       {
         path: "friends",
-        element: <FriendMainPage />,
+        element: <FriendListPage />,
       },
       {
-        path: "friends/request",
-        element: <FriendRequestPage />,
+        path: "friends/mail",
+        element: <Mail />,
       },
       {
         path: "calendar",
