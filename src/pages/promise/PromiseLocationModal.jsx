@@ -4,6 +4,7 @@ import styles from "@styles/pages/promise/PromiseLocationModal.module.scss";
 import Input from "@components/Input";
 import { CustomOverlayMap, Map, MapMarker } from "react-kakao-maps-sdk";
 import { useEffect, useRef, useState } from "react";
+import Loading from "@components/loading/Loading";
 
 const { kakao } = window;
 
@@ -162,113 +163,128 @@ function PromiseLocationModal({ handleLocation }) {
             </div>
           </div>
         </div>
-        <div className={styles.promise_modal_main}>
-          <div className={styles.map_container}>
-            <Map
-              ref={mapRef}
-              center={state.center}
-              level={5}
-              style={{ width: "100%", height: "100%" }}
-              onCenterChanged={(map) => {
-                const latlng = map.getCenter();
-                setState({
-                  center: {
-                    lat: latlng.getLat(),
-                    lng: latlng.getLng(),
-                  },
-                });
-              }}
-              onCreate={setMap}
-            >
-              {!state.isLoading && markers.length === 0 && (
-                <>
-                  <MapMarker
-                    position={state.center}
-                    draggable={false}
-                  ></MapMarker>
-                  <CustomOverlayMap position={state.center} yAnchor={2}>
-                    <div className={styles.address_container}>
-                      <p className={styles.address_content}>{address}</p>
-                      <button
-                        className={styles.address_button}
-                        type="button"
-                        onClick={() => {
-                          setLocation(address);
-                          setCoords({
-                            lat: state.center.lat.toString(),
-                            lng: state.center.lng.toString(),
-                          });
-                        }}
-                      >
-                        선택
-                      </button>
-                    </div>
-                  </CustomOverlayMap>
-                </>
-              )}
-              {!state.isLoading &&
-                markers.length > 0 &&
-                markers.map((marker) => (
-                  <div
-                    key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
-                  >
+        {state.isLoading ? (
+          <Loading />
+        ) : (
+          <div className={styles.promise_modal_main}>
+            <div className={styles.map_container}>
+              <Map
+                ref={mapRef}
+                center={state.center}
+                level={5}
+                style={{ width: "100%", height: "100%" }}
+                onCenterChanged={(map) => {
+                  const latlng = map.getCenter();
+                  setState({
+                    center: {
+                      lat: latlng.getLat(),
+                      lng: latlng.getLng(),
+                    },
+                  });
+                }}
+                onCreate={setMap}
+              >
+                {markers.length === 0 && (
+                  <>
                     <MapMarker
-                      position={marker.position}
-                      onClick={() => setInfo(marker)}
-                    />
-                    {info && info.content === marker.content && (
-                      <CustomOverlayMap position={marker.position} yAnchor={2}>
-                        <div className={styles.address_container}>
-                          <p className={styles.address_content}>
-                            {marker.content}
-                          </p>
-                          <button
-                            className={styles.address_button}
-                            type="button"
-                            onClick={() => {
-                              setLocation(marker.content);
-                              setCoords(marker.position);
-                              setMarkers([marker]);
-                              setState({
-                                center: {
-                                  lat: marker.position.lat,
-                                  lng: marker.position.lng,
-                                },
-                              });
-                              map.setLevel(5);
-                              document.getElementById("search").value = "";
-                            }}
-                          >
-                            선택
-                          </button>
-                        </div>
-                      </CustomOverlayMap>
-                    )}
-                  </div>
-                ))}
-              <div id="control" className={styles.control}>
-                <button type="button" onClick={handleReset}>
-                  <i className="ir">직접 선택</i>
-                  <img src="/src/assets/marker.svg" alt="마커" />
-                </button>
-                <button type="button" onClick={handleZoomIn}>
-                  +
-                </button>
-                <button type="button" onClick={handleZoomOut}>
-                  -
-                </button>
-              </div>
-            </Map>
+                      position={state.center}
+                      draggable={false}
+                    ></MapMarker>
+                    <CustomOverlayMap position={state.center} yAnchor={2}>
+                      <div className={styles.address_container}>
+                        <p className={styles.address_content}>{address}</p>
+                        <button
+                          className={styles.address_button}
+                          type="button"
+                          onClick={() => {
+                            setLocation(address);
+                            setCoords({
+                              lat: state.center.lat.toString(),
+                              lng: state.center.lng.toString(),
+                            });
+                          }}
+                        >
+                          선택
+                        </button>
+                      </div>
+                    </CustomOverlayMap>
+                  </>
+                )}
+                {markers.length > 0 &&
+                  markers.map((marker) => (
+                    <div
+                      key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
+                    >
+                      <MapMarker
+                        position={marker.position}
+                        onClick={() => setInfo(marker)}
+                      />
+                      {info && info.content === marker.content && (
+                        <CustomOverlayMap
+                          position={marker.position}
+                          yAnchor={2}
+                        >
+                          <div className={styles.address_container}>
+                            <p className={styles.address_content}>
+                              {marker.content}
+                            </p>
+                            <button
+                              className={styles.address_button}
+                              type="button"
+                              onClick={() => {
+                                setLocation(marker.content);
+                                setCoords(marker.position);
+                                setMarkers([marker]);
+                                setState({
+                                  center: {
+                                    lat: marker.position.lat,
+                                    lng: marker.position.lng,
+                                  },
+                                });
+                                map.setLevel(5);
+                                document.getElementById("search").value = "";
+                              }}
+                            >
+                              선택
+                            </button>
+                          </div>
+                        </CustomOverlayMap>
+                      )}
+                    </div>
+                  ))}
+                <div id="control" className={styles.control}>
+                  <button type="button" onClick={handleReset}>
+                    <i className="ir">직접 선택</i>
+                    <img src="/src/assets/marker.svg" alt="마커" />
+                  </button>
+                  <button type="button" onClick={handleZoomIn}>
+                    +
+                  </button>
+                  <button type="button" onClick={handleZoomOut}>
+                    -
+                  </button>
+                </div>
+              </Map>
+            </div>
           </div>
-        </div>
+        )}
+
         <div className={styles.promise_modal_footer}>
           <p className={styles.footer_content}>{location}</p>
           <div className={styles.footer_button}>
-            <Button
-              text="선택 완료"
-              size="extraSmall"
-              onClick={handleLocation}
-            />
+            <div>
+              <Button
+                text="선택 완료"
+                size="extraSmall"
+                onClick={handleLocation}
+              />
+              <Button
+                text="취소"
+                color="color2"
+                size="extraSmall"
+                onClick={handleLocation}
+              />
+            </div>
           </div>
         </div>
       </div>

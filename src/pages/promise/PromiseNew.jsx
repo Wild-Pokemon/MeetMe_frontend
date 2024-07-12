@@ -1,13 +1,12 @@
 import styles from "@styles/pages/promise/Promise.module.scss";
-import dropdown from "@assets/down.svg";
 import Input from "@components/Input";
 import Button from "@components/Button";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import PromiseFriendModal from "@pages/promise/PromiseFriendModal";
-import PromiseLocationModal from "@pages/promise/PromiseLocationModal";
+// import PromiseLocationModal from "@pages/promise/PromiseLocationModal";
 import Dropdown from "@components/Dropdown";
-import PromiseCenterLocationModal from "@pages/promise/PromiseCenterLocationModal";
+import PromiseLocation from "@pages/promise/PromiseLocation";
 
 function PromiseNew() {
   const {
@@ -97,15 +96,13 @@ function PromiseNew() {
             <Button text={"장소선택"} size="small" onClick={handleLocation} />
           </div>
           {location ? (
-            <PromiseCenterLocationModal handleLocation={handleLocation} />
+            <PromiseLocation handleLocation={handleLocation} />
           ) : (
+            /* <PromiseLocationModal handleLocation={handleLocation} /> */
+
             ""
           )}
-          {/* {location ? (
-            <PromiseLocationModal handleLocation={handleLocation} />
-          ) : (
-            ""
-          )} */}
+
           <div className={styles.inputResult}>장소를 선택해주세요.</div>
         </div>
 

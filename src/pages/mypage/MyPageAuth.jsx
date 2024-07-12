@@ -10,9 +10,19 @@ function MyPageAuth() {
     formState: { errors },
     // setError,
   } = useForm();
+  
+  const onSubmit = async (formData) => {
+    try {
+      const res = await axios.post("/auth/password", formData);
 
-  const onSubmit = (formData) => {
-    console.log(formData);
+      if (res.data.code === 200) {
+        navigate("/mypage/edit");
+      } else {
+        throw new Error(res.data.message);
+      }
+    } catch (e) {
+      alert(e.message);
+    }
   };
 
   return (
