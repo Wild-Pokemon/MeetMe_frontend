@@ -1,5 +1,5 @@
 import styles from "@styles/pages/calendar/Calendar.module.scss";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   getYear,
   subMonths,
@@ -16,17 +16,37 @@ import {
 import nextIcon from "@assets/calendar_next.svg";
 import prevIcon from "@assets/calendar_prev.svg";
 import CalendarModal from "@pages/calendar/CalendarModal";
+import useCustomAxios from "@hooks/useCustomAxios.mjs";
+import useCalendarStore from "@zustand/calendar.mjs";
 // import promiseInactive from "@assets/promise_inactive.svg";
 
 function Calendar() {
   const [isModal, setIsModal] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
-
+  const { setCalendarData } = useCalendarStore();
   const year = getYear(currentDate);
   const monthStart = startOfMonth(currentDate);
   const monthEnd = endOfMonth(currentDate);
   const startDate = startOfWeek(monthStart);
   const endDate = endOfWeek(monthEnd);
+
+  const [data, setData] = useState();
+  const axios = useCustomAxios();
+
+  const fetchData = async () => {
+    try {
+      // const dayData = format(day, "yyyy-MM-dd");
+      // const res = await axios.get(`/promise/schedule?date=2024-07-27`);
+      await axios.get("/promise/schedule?date=2024-07-27");
+      console.log(res);
+    } catch (err) {
+      console.log("에러", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const weekList = ["일", "월", "화", "수", "목", "금", "토"];
   const weeks = weekList.map((item, i) => (
@@ -48,30 +68,28 @@ function Calendar() {
     return monthArray;
   }, [startDate, endDate]);
 
-  const handleOpenModal = () => {
-    setIsModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModal(false);
+  const handleModal = (day) => {
+    if (!isModal) {
+      setCalendarData(day);
+      setIsModal(true);
+    } else {
+      setIsModal(false);
+    }
   };
 
   const days = createMonth.map((item, i) => {
     const isCurrentMonth = isSameMonth(item, currentDate);
 
+    // const dayData = format(isCurrentMonth, "yyyy-MM-dd");/
+    // console.log(dayData);
     return isCurrentMonth ? (
-      <div className={styles.daysItem} key={i} onClick={handleOpenModal}>
+      <div
+        className={styles.daysItem}
+        key={i}
+        onClick={() => handleModal(format(item, "yyyy-MM-dd"))}
+      >
         {format(item, "d")}
         <p>11시 모각코 | 강남역12번 출구 | 홍길동외 3명</p>
-        {/* //일정만들기 달력 구현시 이미지로 표시
-         <div className={styles.daysCover}>
-          <img
-            className={daysSrc}
-            src={promiseInactive}
-            alt="약속 없음(지남)"
-          />
-        </div>
-        */}
       </div>
     ) : (
       <div className={styles.daysItem_null} key={i}></div>
@@ -88,7 +106,7 @@ function Calendar() {
 
   return (
     <div>
-      {isModal && <CalendarModal handleCloseModal={handleCloseModal} />}
+      {isModal && <CalendarModal handleCloseModal={handleModal} />}
       <div className={styles.calendar_wrapper}>
         <div className={styles.calendar_header}>
           <h2>
