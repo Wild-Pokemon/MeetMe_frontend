@@ -9,6 +9,10 @@ import Button from "@components/Button";
 function FriendRequestPage() {
   const axios = useCustomAxios();
   const [reciveRequest, setReciveRequest] = useState(null);
+  const [statusType] = useState({
+    accept: "Y", // 수락 상태
+    reject: "N", // 거절 상태
+  });
 
   useEffect(() => {
     /** 친구요청 후 내 아이디로 전송된 친구요청 */
@@ -24,14 +28,31 @@ function FriendRequestPage() {
     getRequestNewFriends();
   }, []);
 
-  console.log("x", reciveRequest?.data?.request);
+  /** 친구 수락 또는 거절 */
+  const handleRequestReception = async (seqId, action) => {
+    try {
+      const type = statusType[action]; // action을 통해 type을 결정
+      const res = await axios.put(
+        `/friends/push?seqId=${seqId}&statusType=${type}`
+      );
+      console.log(res.data);
 
-  // const result = reciveRequest?.data?.request.map((item) => {
-  //   return item;
-  // });
-
-  //필요한 데이터 email ,name
-  // console.log("요청받은 친구", result);
+      // 요청 수락 또는 거절 후 상태 갱신 로직 추가
+      setReciveRequest((prev) => {
+        if (!prev) return prev;
+        return {
+          ...prev,
+          data: {
+            request: prev.data.request.filter(
+              (request) => request.seqId !== seqId
+            ),
+          },
+        };
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className={styles.FriendRequestPageLayout}>
@@ -42,7 +63,7 @@ function FriendRequestPage() {
         </div>
         {reciveRequest?.data?.request?.map((item) => {
           return (
-            <div key={item.userId} className={styles.container}>
+            <div key={item.seqId} className={styles.container}>
               <div className={styles.ListItemLayout}>
                 <div>
                   <div className={styles.ListProfile}>
@@ -54,12 +75,23 @@ function FriendRequestPage() {
                     <div>
                       <p className={styles.UserName}>{item.name}</p>
                       <p className={styles.UserEmail}>{item.email}</p>
+                      {/* <p className={styles.UserEmail}>{item.seqId}</p> */}
                     </div>
                   </div>
                 </div>
                 <div className={styles.ButtonWrapper}>
-                  <Button text="수락" color="color1" size="superSmall" />
-                  <Button text="거절" color="color2" size="superSmall" />
+                  <Button
+                    onClick={() => handleRequestReception(item.seqId, "accept")}
+                    text="수락"
+                    color="color1"
+                    size="superSmall"
+                  />
+                  <Button
+                    text="거절"
+                    color="color2"
+                    size="superSmall"
+                    onClick={() => handleRequestReception(item.seqId, "reject")}
+                  />
                 </div>
               </div>
             </div>

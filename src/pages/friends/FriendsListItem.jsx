@@ -25,7 +25,7 @@ function FriendsListItem({ friend, isAddFriendMode }) {
   /** 추가 하고 싶은 친구 id를 매개변수로 받아 추가를 보내는 함수 */
   const handleAddFriend = async (userId) => {
     try {
-      await axios.post(
+      const response = await axios.post(
         `/friends`,
         { userId },
         {
@@ -34,14 +34,28 @@ function FriendsListItem({ friend, isAddFriendMode }) {
           },
         }
       );
-      console.log(`친구 추가 요청: ${userId}`);
+
+      // 서버의 응답 데이터 가져오기
+      const { data, status } = response;
+
+      console.log(`서버 응답 데이터:`, data);
+      console.log(`응답 상태 코드:`, status);
+
+      if (data.code === 200) {
+        alert(`친구 신청을 보냈어요!`);
+      } else if (data.code === 400) {
+        alert(`서버에서 오류가 발생했습니다: ${data.message}`);
+      }
     } catch (error) {
       console.error("친구 추가 요청 실패:", error);
+      alert(
+        `친구 추가 요청 실패: ${error.response?.data?.message || error.message}`
+      );
     }
   };
 
   return (
-    <div className={styles.ListItemLayout}>
+    <div className={`${styles.ListItemLayout} ${styles.fadeIn}`}>
       <div className={styles.ListProfile}>
         <img
           src={basic_profile}
@@ -49,11 +63,9 @@ function FriendsListItem({ friend, isAddFriendMode }) {
           className={styles.ProfileimgSize}
         />
         <div>
-          <p className={styles.UserName}>
-            {friend?.name ? friend?.name : null}
-          </p>
+          <p className={styles.UserName}>{friend?.name ? friend.name : null}</p>
           <p className={styles.UserEmail}>
-            {friend?.email ? friend?.email : null}
+            {friend?.email ? friend.email : null}
           </p>
         </div>
       </div>

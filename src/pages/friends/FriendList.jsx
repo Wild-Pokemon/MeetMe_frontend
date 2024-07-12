@@ -17,7 +17,7 @@ function FriendList({ friendData }) {
       <div className={styles.FriendListTitle}>
         <span>{friendData?.data?.friendList.length}명</span>
         <Button
-          text={isEditMode ? "편집" : "완료"}
+          text={isEditMode ? "완료" : "편집"}
           color={isEditMode ? "color2" : "color1"}
           size="superSmall"
           onClick={setIsEditMode}

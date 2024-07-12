@@ -57,7 +57,7 @@ function FriendPageTitle() {
     getSearchInfo();
   }, [debouncedSearchTerm]);
 
-  const isAddFriendMode = true;
+  const [isAddFriendMode] = useState(true);
 
   const allUsers = searchResult?.data?.map((item, index) => (
     <FriendsListItem
@@ -93,7 +93,6 @@ function FriendPageTitle() {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            closeModal();
           }}
         >
           <FriendPageInput

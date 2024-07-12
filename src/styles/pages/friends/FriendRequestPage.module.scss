@@ -37,4 +37,8 @@
       color: var(--color-gray-50);
     }
   }
+  .ButtonWrapper {
+    display: flex;
+    gap: 2rem;
+  }
 }
