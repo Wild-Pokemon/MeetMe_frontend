@@ -1,0 +1,18 @@
+meta {
+  name: 로그인
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{url}}/auth/login
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "sozzang@naver.com",
+    "password": "asdf1234!@"
+  }
+}

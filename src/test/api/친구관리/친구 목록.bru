@@ -1,0 +1,15 @@
+meta {
+  name: 친구 목록
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{url}}/friends?pageNo=1
+  body: none
+  auth: none
+}
+
+query {
+  pageNo: 1
+}

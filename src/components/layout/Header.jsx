@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import styles from "@styles/components/Header.module.scss";
 import meetmeLogo from "@assets/meetme_logo_symbol.svg";
@@ -13,6 +13,7 @@ import useUserStore from "@zustand/user.mjs";
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, setUser } = useUserStore();
+  const navigate = useNavigate();
 
   const handleMenuToggle = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -24,59 +25,49 @@ function Header() {
 
   const handleLogout = () => {
     setUser(null);
+    navigate("/users/login");
   };
 
   return (
-    <div
-      className={`${styles.header} ${isMenuOpen ? styles.headerexpanded : ""}`}
-    >
+    <header className={styles.header_container}>
       <div className={styles.header_wrapper}>
-        <div className={styles.header_logo}>
-          <Link to={"/"} onClick={closeMenu}>
-            <img src={meetmeLogo} alt="MeetMe Logo" />
-          </Link>
-        </div>
-        <div className={styles.header_menu}>
-          <button onClick={handleMenuToggle} className={styles.menu_button}>
-            <img src={isMenuOpen ? closeIcon : hamburger} alt="Menu Button" />
-          </button>
-        </div>
-      </div>
-      <div
-        className={`${styles.menu_items} ${
-          isMenuOpen ? styles.menu_itemsopen : ""
-        }`}
-      >
-        <div className={styles.menu_item}>
-          <img src={myPageIcon} alt="My Page" />
-          <Link to="/mypage" className="text-1" onClick={closeMenu}>
-            마이페이지
-          </Link>
-        </div>
-        <div className={styles.menu_item}>
-          <img src={friendsIcon} alt="Friends" />
-          <Link to="/friends" onClick={closeMenu}>
-            친구관리
-          </Link>
-        </div>
-        <div className={styles.menu_item}>
-          <img src={scheduleIcon} alt="Schedule" />
-          <Link to="/calendar" onClick={closeMenu}>
-            스케줄관리
-          </Link>
-        </div>
-        {user && (
-          <div onClick={closeMenu}>
-            <Button
-              text={"로그아웃"}
-              size={"extraSmall"}
-              className={styles.btn}
-              onClick={handleLogout}
-            ></Button>
+        <div className={styles.header_items}>
+          <div>
+            <Link>
+              <img src={meetmeLogo} alt="로고" />
+            </Link>
           </div>
-        )}
+          <div className={styles.leftside}>
+            <div className={styles.eachItem}>
+              <img src={myPageIcon} alt="마이페이지" />
+              <Link to="/mypage" className="text-1" onClick={closeMenu}>
+                마이페이지
+              </Link>
+            </div>
+            <div className={styles.eachItem}>
+              <img src={friendsIcon} alt="마이페이지" />
+              <Link to="/friends" onClick={closeMenu}>
+                친구관리
+              </Link>
+            </div>
+            <div className={styles.eachItem}>
+              <img src={scheduleIcon} alt="마이페이지" />
+              <Link to="/calendar" onClick={closeMenu}>
+                스케줄관리
+              </Link>
+            </div>
+            <div className={styles.eachItem}>
+              <Button
+                text={"로그아웃"}
+                size={"extraSmall"}
+                className={styles.btn}
+                onClick={handleLogout}
+              ></Button>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </header>
   );
 }
 

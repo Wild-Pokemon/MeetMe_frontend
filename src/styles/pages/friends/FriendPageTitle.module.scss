@@ -1,0 +1,38 @@
+.titlePageLayout {
+  margin-top: 4rem;
+  margin-bottom: 3rem;
+}
+.titlePageWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.titleImageWrapper {
+  margin-left: auto;
+  display: flex;
+  gap: 3rem;
+}
+
+.titlePageHeader {
+  font-size: 2.4rem;
+  font-weight: 500;
+  animation: fadeInSlideIn 1s ease-out;
+}
+
+@keyframes fadeInSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.gapgap {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 3rem;
+  overflow-y: scroll;
+}
