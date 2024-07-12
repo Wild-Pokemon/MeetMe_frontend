@@ -115,7 +115,9 @@ function MyPageEdit() {
                   },
                 })}
               />
-              {errors.password && <p>{errors.passwordConfirm.message}</p>}
+              {errors.passwordConfirm && (
+                <p>{errors.passwordConfirm.message}</p>
+              )}
             </div>
           </>
         )}
