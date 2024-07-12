@@ -1,0 +1,19 @@
+meta {
+  name: 비밀번호 재설정 & 프로필 수정
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{url}}/auth/profile
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "woook@naver.com",
+    "password": "asdf1234!@",
+    "phone": "01011114444"
+  }
+}
