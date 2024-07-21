@@ -26,7 +26,7 @@ function PromiseLocationModal({ handleLocation }) {
   const [coords, setCoords] = useState();
 
   // 위치, 위도 경도
-  console.log(location, coords);
+  // console.log(location, coords);
 
   // 현재 위치 받아오기
   useEffect(() => {
@@ -276,13 +276,27 @@ function PromiseLocationModal({ handleLocation }) {
               <Button
                 text="선택 완료"
                 size="extraSmall"
-                onClick={handleLocation}
+                onClick={() => {
+                  if (!location) {
+                    alert("장소를 선택해주세요!");
+                    return;
+                  }
+                  handleLocation({
+                    location,
+                    coords,
+                  });
+                }}
               />
               <Button
                 text="취소"
                 color="color2"
                 size="extraSmall"
-                onClick={handleLocation}
+                onClick={() =>
+                  handleLocation({
+                    location,
+                    coords,
+                  })
+                }
               />
             </div>
           </div>
