@@ -18,7 +18,6 @@ import prevIcon from "@assets/calendar_prev.svg";
 import CalendarModal from "@pages/calendar/CalendarModal";
 import useCustomAxios from "@hooks/useCustomAxios.mjs";
 import useCalendarStore from "@zustand/calendar.mjs";
-// import promiseInactive from "@assets/promise_inactive.svg";
 
 function Calendar() {
   const [isModal, setIsModal] = useState(false);
@@ -33,11 +32,23 @@ function Calendar() {
   const [data, setData] = useState();
   const axios = useCustomAxios();
 
-  const fetchData = async () => {
+  //이전달
+  const prevMonth = useCallback(() => {
+    setCurrentDate(subMonths(currentDate, 1));
+  }, [currentDate]);
+
+  //다음달
+  const nextMonth = useCallback(() => {
+    setCurrentDate(addMonths(currentDate, 1));
+  }, [currentDate]);
+
+  const month = format(currentDate, "yyyy-MM");
+
+  //데이터 통신
+  const fetchData = async (month) => {
     try {
-      // const dayData = format(day, "yyyy-MM-dd");
-      // const res = await axios.get(`/promise/schedule?date=2024-07-27`);
-      await axios.get("/promise/schedule?date=2024-07-27");
+      const res = await axios.get(`/promise/schedule?date=${month}`);
+      setData(res.data.data);
       console.log(res);
     } catch (err) {
       console.log("에러", err);
@@ -45,8 +56,8 @@ function Calendar() {
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchData(month);
+  }, [prevMonth, nextMonth]);
 
   const weekList = ["일", "월", "화", "수", "목", "금", "토"];
   const weeks = weekList.map((item, i) => (
@@ -68,6 +79,51 @@ function Calendar() {
     return monthArray;
   }, [startDate, endDate]);
 
+  // const days = createMonth.map((item, i) => {
+  //   const isCurrentMonth = isSameMonth(item, currentDate);
+
+  //   return isCurrentMonth ? (
+  //     <div
+  //       className={styles.daysItem}
+  //       key={i}
+  //       onClick={() => handleModal(format(item, "yyyy-MM-dd"))}
+  //     >
+  //       {format(item, "d")}
+  //       {/* <p>11시 모각코 | 강남역12번 출구 | 홍길동외 3명</p> */}
+  //     </div>
+  //   ) : (
+  //     <div className={styles.daysItem_null} key={i}></div>
+  //   );
+  // });
+  const days = createMonth.map((item, i) => {
+    const isCurrentMonth = isSameMonth(item, currentDate);
+    const hasEvent = data?.find((dataItem) => {
+      const eventDate = new Date(dataItem.meetDates);
+      return eventDate.toDateString() === item.toDateString();
+    });
+
+    return isCurrentMonth ? (
+      hasEvent ? (
+        <div
+          className={styles.daysItem}
+          key={i}
+          onClick={() => handleModal(format(item, "yyyy-MM-dd"))}
+        >
+          {format(item, "d")}
+          <p>
+            {hasEvent.meetName} | {hasEvent.meetLocationName}
+          </p>
+        </div>
+      ) : (
+        <div className={styles.daysItem} key={i}>
+          {format(item, "d")}
+        </div>
+      )
+    ) : (
+      <div className={styles.daysItem} key={i}></div>
+    );
+  });
+
   const handleModal = (day) => {
     if (!isModal) {
       setCalendarData(day);
@@ -76,33 +132,6 @@ function Calendar() {
       setIsModal(false);
     }
   };
-
-  const days = createMonth.map((item, i) => {
-    const isCurrentMonth = isSameMonth(item, currentDate);
-
-    // const dayData = format(isCurrentMonth, "yyyy-MM-dd");/
-    // console.log(dayData);
-    return isCurrentMonth ? (
-      <div
-        className={styles.daysItem}
-        key={i}
-        onClick={() => handleModal(format(item, "yyyy-MM-dd"))}
-      >
-        {format(item, "d")}
-        <p>11시 모각코 | 강남역12번 출구 | 홍길동외 3명</p>
-      </div>
-    ) : (
-      <div className={styles.daysItem_null} key={i}></div>
-    );
-  });
-
-  const prevMonth = useCallback(() => {
-    setCurrentDate(subMonths(currentDate, 1));
-  }, [currentDate]);
-
-  const nextMonth = useCallback(() => {
-    setCurrentDate(addMonths(currentDate, 1));
-  }, [currentDate]);
 
   return (
     <div>
